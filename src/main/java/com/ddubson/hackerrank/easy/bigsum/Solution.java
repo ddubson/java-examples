@@ -13,7 +13,7 @@ public class Solution {
 		StringTokenizer s = new StringTokenizer(r.readLine());
 		long sum = 0;
 		while(s.hasMoreTokens()) {
-			sum = Long.valueOf(s.nextToken());
+			sum += Long.valueOf(s.nextToken());
 		}
 		System.out.print(sum);
 	}
