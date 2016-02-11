@@ -13,13 +13,21 @@ public class Solution {
 		int hourIn24;
 
 		if(!isAM) {
-			hourIn24 = hour + 12;
+			hourIn24 = hour == 12 ? 12 : hour + 12;
 		} else {
-			hourIn24 = hour;
+			hourIn24 = hour == 12 ? 0 : hour;
 		}
 
 		String abbrTime = time.substring(2, time.length() - 2);
-		String stdTime = hourIn24 + abbrTime;
+		String hourStr;
+
+		if (hourIn24 < 10) {
+			hourStr = "0" + hourIn24;
+		} else {
+			hourStr = String.valueOf(hourIn24);
+		}
+
+		String stdTime = hourStr + abbrTime;
 		System.out.print(stdTime);
 	}
 }
