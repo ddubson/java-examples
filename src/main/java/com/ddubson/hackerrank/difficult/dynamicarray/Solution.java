@@ -1,4 +1,4 @@
-package com.ddubson.hackerrank.difficult;
+package com.ddubson.hackerrank.difficult.dynamicarray;
 
 import java.io.*;
 import java.util.*;
@@ -34,8 +34,9 @@ public class Solution {
 
 			if(Integer.parseInt(fullQuery[0]) == 2) {
 				seq = sequences.get(findSequence(Integer.parseInt(fullQuery[1]), lastans, numberOfSequences));
-				System.out.println(seq.get(Integer.parseInt(fullQuery[2]) % seq.size()));
-				lastans = seq.size();
+				int ans = seq.get(Integer.parseInt(fullQuery[2]) % seq.size());
+				System.out.println(ans);
+				lastans = ans;
 			}
 		}
 
