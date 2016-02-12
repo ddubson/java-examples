@@ -24,15 +24,24 @@ public class Solution {
             }
 
             boolean same = false;
+            int sumTotal = IntStream.of(numbers).sum();
+            int leftRollingSum = 0;
+            int rightRollingSum = sumTotal;
+
+            if(arraySize == 1) {
+                same = true;
+            }
+
             for(int j = 0; j < arraySize; j++) {
                 if(j == 0 || j+1 == numbers.length) {
+                    rightRollingSum -= numbers[j];
                     continue;
                 }
 
-                int leftSum = IntStream.of(Arrays.copyOfRange(numbers, 0, j)).sum();
-                int rightSum = IntStream.of(Arrays.copyOfRange(numbers, j+1, numbers.length)).sum();
+                leftRollingSum += numbers[j-1];
+                rightRollingSum -= numbers[j];
 
-                if(leftSum == rightSum && leftSum != 0) {
+                if(leftRollingSum == rightRollingSum) {
                     same = true;
                 }
             }
