@@ -108,18 +108,6 @@ public class Solution2 {
 				subTrees.put(j, new TreeNode(numArray[j]));
 			}
 
-			// Connect nodes
-			for (int j = 0; j < n; j++) {
-				TreeNode node = subTrees.get(j);
-
-				if (j + m >= n || j + 1 >= n) {
-
-				}
-
-				node.setMovePlusM(subTrees.get(j + m));
-				node.setMoveMinusOne(subTrees.get(j - 1));
-				node.setMovePlusOne(subTrees.get(j + 1));
-			}
 			// Traverse tree and identify a path of all 0s leading to WIN
 
 			while (true) {

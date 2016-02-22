@@ -1,4 +1,4 @@
-package com.ddubson.datastructures;
+package com.ddubson.datastructures.trees;
 
 /**
  * Created by ddubson on 2/16/16.

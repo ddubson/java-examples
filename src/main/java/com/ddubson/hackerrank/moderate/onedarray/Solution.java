@@ -4,93 +4,80 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by d.dubson on 2/19/2016.
  */
 public class Solution {
-	enum Path {
-		ONE,
-		TWO,
-		THREE
-	}
+    public static void main(String[] args) throws IOException {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        int testCases = Integer.parseInt(r.readLine());
 
-	public static void main(String[] args) throws IOException {
-		/* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
-		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-		int testCases = Integer.parseInt(r.readLine());
+        for (int i = 0; i < testCases; i++) {
+            String line1 = r.readLine();
+            int n = Integer.parseInt(line1.split(" ")[0]);
+            int m = Integer.parseInt(line1.split(" ")[1]);
 
-		for (int i = 0; i < testCases; i++) {
-			String line1 = r.readLine();
-			int n = Integer.parseInt(line1.split(" ")[0]);
-			int m = Integer.parseInt(line1.split(" ")[1]);
+            String[] arrayStr = r.readLine().split(" ");
+            int[] numArray = new int[n];
+            int[] visitedArray = new int[n];
 
-			String[] arrayStr = r.readLine().split(" ");
-			int[] numArray = new int[n];
-			for (int j = 0; j < n; j++) {
-				numArray[j] = Integer.parseInt(arrayStr[j]);
-			}
+            Map<Integer, Path> lastPos = new HashMap<>();
+            for (int j = 0; j < n; j++) {
+                numArray[j] = Integer.parseInt(arrayStr[j]);
+                lastPos.put(j, Path.NONE);
+            }
 
-			int currentPos = 0;
-			boolean haveWon = false;
-			int interimPos = currentPos;
-			Map<Integer, Set<Path>> pathsAttempted = new HashMap<>();
-			while (true) {
-				if (pathsAttempted.containsKey(interimPos)
-						&& pathsAttempted.get(interimPos).size() == 3) {
-					haveWon = false;
-					break;
-				} else {
-					if (pathsAttempted.get(interimPos) == null) {
-						pathsAttempted.put(interimPos, new HashSet<>());
-					}
-				}
+            boolean haveWon = false;
+            int interimPos = 0;
+            while (true) {
+                if (visitedArray[interimPos] >= 4) {
+                    haveWon = false;
+                    break;
+                } else {
+                    visitedArray[interimPos]++;
+                }
 
-				if (interimPos + m >= n || interimPos + 1 >= n) {
-					haveWon = true;
-					break;
-				}
+                if (interimPos + m >= n || interimPos + 1 >= n) {
+                    haveWon = true;
+                    break;
+                }
 
-				if (!pathsAttempted.get(interimPos).contains(Path.THREE)
-						&& numArray[interimPos + m] == 0) {
-					pathsAttempted.get(interimPos).add(Path.THREE);
-					interimPos += m;
-					continue;
-				} else {
-					pathsAttempted.get(interimPos).add(Path.THREE);
-				}
+                if (interimPos + m != interimPos && numArray[interimPos + m] == 0) {
+                    interimPos += m;
+                    continue;
+                }
 
-				if (!pathsAttempted.get(interimPos).contains(Path.TWO)
-						&& numArray[interimPos + 1] == 0) {
-					pathsAttempted.get(interimPos).add(Path.TWO);
-					interimPos++;
-					continue;
-				} else {
-					pathsAttempted.get(interimPos).add(Path.TWO);
-				}
+                if (!lastPos.get(interimPos).equals(Path.PLUSONE) && numArray[interimPos + 1] == 0) {
+                    lastPos.put(interimPos + 1, Path.MINUSONE);
+                    interimPos++;
+                    continue;
+                }
 
-				if (!pathsAttempted.get(interimPos).contains(Path.ONE)
-						&& interimPos - 1 >= 0
-						&& numArray[interimPos - 1] == 0) {
-					pathsAttempted.get(interimPos).add(Path.ONE);
-					interimPos--;
-					continue;
-				} else {
-					pathsAttempted.get(interimPos).add(Path.ONE);
-				}
+                if (!lastPos.get(interimPos).equals(Path.MINUSONE) && interimPos - 1 >= 0 && numArray[interimPos - 1] == 0) {
+                    lastPos.put(interimPos - 1, Path.PLUSONE);
+                    interimPos--;
+                    continue;
+                }
 
-				haveWon = false;
-				break;
-			}
+                haveWon = false;
+                break;
+            }
 
-			if (haveWon) {
-				System.out.println("YES");
-			} else {
-				System.out.println("NO");
-			}
-		}
-	}
+            if (haveWon) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+
+    }
+
+    enum Path {
+        NONE,
+        PLUSONE,
+        MINUSONE
+    }
 }
