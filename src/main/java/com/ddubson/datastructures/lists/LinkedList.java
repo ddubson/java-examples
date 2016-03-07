@@ -19,11 +19,13 @@ public class LinkedList<T> implements List<T> {
 			n.setNext(null);
 			firstNode = n;
 			lastNode = firstNode;
-		} else {
-
 		}
 
 		size++;
+	}
+
+	public T get(int index) {
+		return null;
 	}
 
 	public int size() {
