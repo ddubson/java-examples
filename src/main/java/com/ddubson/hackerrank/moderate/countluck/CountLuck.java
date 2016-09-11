@@ -13,6 +13,7 @@ public class CountLuck {
     BufferedReader reader;
     XY start;
     int paths;
+    boolean found = false;
     BiPredicate<char[][], XY> isOpenPath = (board, point) -> {
         if (point.X < 0 || point.Y < 0) return false;
 
@@ -43,10 +44,11 @@ public class CountLuck {
             int K = readSingleInt();
 
             this.paths = 0;
-            traverse(start, start, board);
+            this.found = false;
+            traverse(start, board);
 
             System.out.println("K: " + K + " | Forks: " + paths);
-            printArray(board);
+            //printArray(board);
             if (K == paths) {
                 System.out.println("Impressed");
             } else {
@@ -56,21 +58,20 @@ public class CountLuck {
     }
 
     private void printArray(char[][] arr) {
-        for(int x = 0; x < arr.length; x++) {
-            for(int y = 0; y < arr[0].length; y++) {
+        for (int x = 0; x < arr.length; x++) {
+            for (int y = 0; y < arr[0].length; y++) {
                 System.out.print(arr[x][y] + " ");
             }
             System.out.println();
         }
     }
 
-    private void traverse(XY comingFrom, XY currentPos, char[][] board) {
+    private void traverse(XY currentPos, char[][] board) {
         if (board[currentPos.X][currentPos.Y] == END) {
+            found = true;
             return;
         }
-
         markAsTraversed(currentPos, board);
-
         XY left = new XY(currentPos.X - 1, currentPos.Y);
         XY right = new XY(currentPos.X + 1, currentPos.Y);
         XY top = new XY(currentPos.X, currentPos.Y - 1);
@@ -79,24 +80,21 @@ public class CountLuck {
         boolean goRight = isOpenPath.test(board, right);
         boolean goTop = isOpenPath.test(board, top);
         boolean goBottom = isOpenPath.test(board, bottom);
-        if ((goLeft ? 1 : 0) + (goRight ? 1 : 0) + (goTop ? 1 : 0) + (goBottom ? 1 : 0) > 1) {
+
+        boolean decisionPoint = false;
+        int potentialPaths = (goLeft ? 1 : 0) + (goRight ? 1 : 0) + (goTop ? 1 : 0) + (goBottom ? 1 : 0);
+        if (potentialPaths > 1) {
             this.paths++;
+            decisionPoint = true;
         }
 
-        if (goLeft) {
-            traverse(currentPos, left, board);
-        }
+        if (goLeft && !found) traverse(left, board);
+        if (goRight && !found) traverse(right, board);
+        if (goTop && !found) traverse(top, board);
+        if (goBottom && !found) traverse(bottom, board);
 
-        if (goRight) {
-            traverse(currentPos, right, board);
-        }
-
-        if (goTop) {
-            traverse(currentPos, top, board);
-        }
-
-        if (goBottom) {
-            traverse(currentPos, bottom, board);
+        if (decisionPoint && !found) {
+            this.paths--;
         }
     }
 
