@@ -12,28 +12,48 @@ import static java.util.stream.Collectors.toList;
  */
 public class BreadthFirstSearch {
     private static final int DEFAULT_DISTANCE = 6;
-    Scanner scanner;
+    static Scanner scanner = new Scanner(System.in);
 
-
-    public BreadthFirstSearch(Scanner scanner) {
-        this.scanner = scanner;
-
+    public static void main(String[] args) {
         int numOfQueries = scanner.nextInt();
         for (int i = 0; i < numOfQueries; i++) {
-            breadthFirstSearch();
+            UndirectedGraph graph = buildGraph();
+            Node source = setAndRetrieveStartNode(graph);
+            breadthFirstSearch(graph, source);
         }
     }
 
-    public static void main(String[] args) {
-        new BreadthFirstSearch(new Scanner(System.in));
+    private static UndirectedGraph buildGraph() {
+        UndirectedGraph g = new UndirectedGraph();
+        int numOfNodes = scanner.nextInt();
+        int numOfEdges = scanner.nextInt();
+
+        for (int i = 1; i <= numOfNodes; i++) {
+            if (!g.nodeExists(i)) {
+                g.add(new Node(i));
+            }
+        }
+
+        for (int i = 0; i < numOfEdges; i++) {
+            int originNodeName = scanner.nextInt();
+            int destinationNodeName = scanner.nextInt();
+            g.createEdge(originNodeName, destinationNodeName);
+        }
+
+        return g;
     }
 
-    private void breadthFirstSearch() {
-        UndirectedGraph g = buildGraph();
+    private static Node setAndRetrieveStartNode(UndirectedGraph graph) {
+        int startNodeName = scanner.nextInt();
+        Node n = graph.getNodeById(startNodeName);
+        n.setStartNode(true);
+        return n;
+    }
+
+    public static void breadthFirstSearch(UndirectedGraph g, Node sourceNode) {
         Queue<Node> queuedNodes = new LinkedList<>();
-        Node startNode = g.getAllNodes().stream().filter(Node::isStartNode).findFirst().get();
-        startNode.setDistanceValue(0);
-        queuedNodes.add(startNode);
+        sourceNode.setDistanceValue(0);
+        queuedNodes.add(sourceNode);
 
         while (!queuedNodes.isEmpty()) {
             Node currentNode = queuedNodes.remove();
@@ -55,27 +75,5 @@ public class BreadthFirstSearch {
 
         g.getAllNodes().stream().filter(node -> !node.isStartNode()).forEach((node -> System.out.print(node.getDistanceValue() + " ")));
         System.out.println();
-    }
-
-    private UndirectedGraph buildGraph() {
-        UndirectedGraph g = new UndirectedGraph();
-        int numOfNodes = scanner.nextInt();
-        int numOfEdges = scanner.nextInt();
-
-        for (int i = 1; i <= numOfNodes; i++) {
-            if (!g.nodeExists(i)) {
-                g.add(new Node(i));
-            }
-        }
-
-        for (int i = 0; i < numOfEdges; i++) {
-            int originNodeName = scanner.nextInt();
-            int destinationNodeName = scanner.nextInt();
-            g.createEdge(originNodeName, destinationNodeName);
-        }
-        int startNodeName = scanner.nextInt();
-        g.getNodeById(startNodeName).setStartNode(true);
-
-        return g;
     }
 }

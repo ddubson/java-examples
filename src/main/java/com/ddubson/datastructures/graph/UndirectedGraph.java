@@ -11,10 +11,12 @@ import static java.util.stream.Collectors.toList;
 public class UndirectedGraph implements Graph {
     private Map<Node, Map<Node, Set<Edge>>> adjList;
     private Map<Integer, Node> nodesList;
+    private List<Edge> edgeList;
 
     public UndirectedGraph() {
         adjList = new HashMap<>();
         nodesList = new HashMap<>();
+        edgeList = new ArrayList<>();
     }
 
     public List<Node> getAllNodes() {
@@ -29,12 +31,27 @@ public class UndirectedGraph implements Graph {
         return nodesList.containsKey(nodeId);
     }
 
-    public boolean edgeExists(int node1, int node2) throws NodeDoesNotExist {
+    public boolean edgeExists(int node1, int node2) {
+        return this.edgeExists(node1, node2, 0);
+    }
+
+    public boolean edgeExists(int node1, int node2, int edgeWeight) throws NodeDoesNotExist {
         assertNodeExists(node1);
         assertNodeExists(node2);
         Node n1 = getNodeById(node1);
         Node n2 = getNodeById(node2);
-        return (adjList.get(n1).containsKey(n2) && adjList.get(n2).containsKey(n1));
+
+        return edgeList.stream().filter(edge -> edge.getEdgeWeight() == edgeWeight &&
+                ((edge.getOrigin() == n1 && edge.getDestination() == n2) ||
+                (edge.getDestination() == n2 && edge.getOrigin() == n1))).findFirst().isPresent();
+    }
+
+    public Set<Edge> getEdges(int node1, int node2) throws NodeDoesNotExist {
+        assertNodeExists(node1);
+        assertNodeExists(node2);
+        Node n1 = getNodeById(node1);
+        Node n2 = getNodeById(node2);
+        return adjList.get(n1).get(n2);
     }
 
     public void createEdge(int node1, int node2) {
@@ -45,27 +62,32 @@ public class UndirectedGraph implements Graph {
         Node n1 = getNodeById(node1);
         Node n2 = getNodeById(node2);
 
-        if (!adjList.containsKey(n1)) {
-            adjList.put(n1, new HashMap<>());
-        }
+        createAdjancencyMapIfNull(n1);
+        createAdjancencyMapIfNull(n2);
 
-        if (!adjList.containsKey(n2)) {
-            adjList.put(n2, new HashMap<>());
-        }
-
-        Edge edge = new Edge(edgeWeight);
+        Edge edge = new Edge(edgeWeight, n1, n2);
 
         Map<Node, Set<Edge>> map = adjList.get(n1);
-        if(adjList.get(n1).get(n2) == null) {
-            map.put(n2, new HashSet<>());
-        }
+        createEdgeMapIfNull(n1, n2, map);
         map.get(n2).add(edge);
 
         map = adjList.get(n2);
-        if(adjList.get(n2).get(n1) == null) {
-            map.put(n1, new HashSet<>());
-        }
+        createEdgeMapIfNull(n2, n1, map);
         map.get(n1).add(edge);
+
+        edgeList.add(edge);
+    }
+
+    private void createEdgeMapIfNull(Node n1, Node n2, Map<Node, Set<Edge>> map) {
+        if (adjList.get(n1).get(n2) == null) {
+            map.put(n2, new HashSet<>());
+        }
+    }
+
+    private void createAdjancencyMapIfNull(Node n1) {
+        if (!adjList.containsKey(n1)) {
+            adjList.put(n1, new HashMap<>());
+        }
     }
 
     public Node getNodeById(int nodeId) throws NodeDoesNotExist {
