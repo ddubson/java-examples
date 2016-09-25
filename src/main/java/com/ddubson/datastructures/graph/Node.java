@@ -4,24 +4,31 @@ package com.ddubson.datastructures.graph;
  * Author: ddubson
  */
 public class Node {
-    private boolean isStartingNode = false;
-    public int distanceValue = -1;
-    public boolean isVisited = false;
-    public int name = -1;
+    private boolean isStartNode = false;
+    private int distanceValue = -1;
+    private int id = -1;
 
-    public Node(int name) {
-        this.name = name;
+    public Node(int id) {
+        this.id = id;
     }
 
-    public int getName() {
-        return this.name;
+    public int getId() {
+        return this.id;
     }
 
-    public void setStartingNode(boolean startingNode) {
-        isStartingNode = startingNode;
+    public void setStartNode(boolean startNode) {
+        isStartNode = startNode;
     }
 
-    public boolean isStartingNode() {
-        return isStartingNode;
+    public boolean isStartNode() {
+        return isStartNode;
+    }
+
+    public void setDistanceValue(int distanceValue) {
+        this.distanceValue = distanceValue;
+    }
+
+    public int getDistanceValue() {
+        return distanceValue;
     }
 }

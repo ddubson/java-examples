@@ -31,31 +31,29 @@ public class BreadthFirstSearch {
     private void breadthFirstSearch() {
         UndirectedGraph g = buildGraph();
         Queue<Node> queuedNodes = new LinkedList<>();
-        Node startNode = g.getAllNodes().stream().filter(Node::isStartingNode).findFirst().get();
-        startNode.distanceValue = 0;
+        Node startNode = g.getAllNodes().stream().filter(Node::isStartNode).findFirst().get();
+        startNode.setDistanceValue(0);
         queuedNodes.add(startNode);
 
         while (!queuedNodes.isEmpty()) {
             Node currentNode = queuedNodes.remove();
 
-            Set<Node> nodes = g.getAllConnectedNodes(currentNode.name);
+            Set<Node> nodes = g.getAllConnectedNodes(currentNode.getId());
 
             if (nodes == null) {
                 continue;
             }
 
             List<Node> infNodes = nodes.stream()
-                    .filter(n -> n.distanceValue == -1).collect(toList());
+                    .filter(n -> n.getDistanceValue() == -1).collect(toList());
 
             infNodes.forEach(n -> {
-                n.distanceValue = currentNode.distanceValue + DEFAULT_DISTANCE;
+                n.setDistanceValue(currentNode.getDistanceValue() + DEFAULT_DISTANCE);
                 queuedNodes.add(n);
             });
         }
 
-        g.getAllNodes().stream().filter(node -> !node.isStartingNode()).forEach((node -> {
-            System.out.print(node.distanceValue + " ");
-        }));
+        g.getAllNodes().stream().filter(node -> !node.isStartNode()).forEach((node -> System.out.print(node.getDistanceValue() + " ")));
         System.out.println();
     }
 
@@ -76,7 +74,7 @@ public class BreadthFirstSearch {
             g.createEdge(originNodeName, destinationNodeName);
         }
         int startNodeName = scanner.nextInt();
-        g.getNodeByName(startNodeName).setStartingNode(true);
+        g.getNodeById(startNodeName).setStartNode(true);
 
         return g;
     }

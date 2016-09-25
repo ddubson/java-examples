@@ -60,8 +60,8 @@ public class UndirectedGraphTest {
         Set<Node> connectedToTwo = graph.getAllConnectedNodes(2);
         assertTrue(connectedToOne.size()==1);
         assertTrue(connectedToTwo.size()==1);
-        connectedToOne.forEach(node -> assertTrue(node.name==2));
-        connectedToTwo.forEach(node -> assertTrue(node.name==1));
+        connectedToOne.forEach(node -> assertTrue(node.getId()==2));
+        connectedToTwo.forEach(node -> assertTrue(node.getId()==1));
     }
 
     @Test
@@ -83,11 +83,11 @@ public class UndirectedGraphTest {
     public void graph_shouldReturnNodeIfExists() throws Exception {
         Node node = new Node(1);
         graph.add(node);
-        assertEquals(node, graph.getNodeByName(1));
+        assertEquals(node, graph.getNodeById(1));
     }
 
     @Test(expected = UndirectedGraph.NodeDoesNotExist.class)
     public void graph_shouldThrowErrorIfNodeDoesNotExist() throws Exception {
-        graph.getNodeByName(1);
+        graph.getNodeById(1);
     }
 }
