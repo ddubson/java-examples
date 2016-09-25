@@ -1,5 +1,5 @@
 package com.ddubson.algorithms;
-
+/*
 import com.ddubson.datastructures.graph.Edge;
 import com.ddubson.datastructures.graph.Graph;
 import com.ddubson.datastructures.graph.Node;
@@ -12,11 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+*/
+
 /**
  * Author: ddubson
  */
+
 public class DijkstraShortestPath {
-    public DijkstraShortestPath() {
+    /*public DijkstraShortestPath() {
     }
 
     public void run() throws IOException {
@@ -96,5 +99,6 @@ public class DijkstraShortestPath {
         }
 
         return g;
-    }
+    }*/
 }
+
