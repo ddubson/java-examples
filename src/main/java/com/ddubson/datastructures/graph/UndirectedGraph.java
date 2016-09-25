@@ -21,7 +21,7 @@ public class UndirectedGraph implements Graph {
         return nodesList.values().stream().collect(toList());
     }
 
-    public Set<Node> getAllConnectedNodes(int rootNodeName) {
+    public Set<Node> getAllConnectedNodes(int rootNodeName) throws NodeDoesNotExist {
         return adjList.get(getNodeByName(rootNodeName));
     }
 
@@ -29,11 +29,9 @@ public class UndirectedGraph implements Graph {
         return nodesList.containsKey(nodeId);
     }
 
-    public boolean edgeExists(int node1, int node2) {
-        if (!nodeExists(node1) || !nodeExists(node1)) {
-            return false;
-        }
-
+    public boolean edgeExists(int node1, int node2) throws NodeDoesNotExist {
+        assertNodeExists(node1);
+        assertNodeExists(node2);
         Node n1 = getNodeByName(node1);
         Node n2 = getNodeByName(node2);
         return (adjList.get(n1).contains(n2) && adjList.get(n2).contains(n1));
@@ -55,8 +53,13 @@ public class UndirectedGraph implements Graph {
         adjList.get(n2).add(n1);
     }
 
-    public Node getNodeByName(int nodeName) {
+    public Node getNodeByName(int nodeName) throws NodeDoesNotExist {
+        assertNodeExists(nodeName);
         return nodesList.get(nodeName);
+    }
+
+    private void assertNodeExists(int nodeName) throws NodeDoesNotExist {
+        if (!nodeExists(nodeName)) throw new NodeDoesNotExist();
     }
 
     public void add(Node node) throws NodeExists {
@@ -66,5 +69,8 @@ public class UndirectedGraph implements Graph {
     }
 
     public class NodeExists extends RuntimeException {
+    }
+
+    public class NodeDoesNotExist extends RuntimeException {
     }
 }
