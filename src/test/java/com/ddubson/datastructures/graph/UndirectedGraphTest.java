@@ -58,10 +58,10 @@ public class UndirectedGraphTest {
         graph.createEdge(1, 2);
         Set<Node> connectedToOne = graph.getAllConnectedNodes(1);
         Set<Node> connectedToTwo = graph.getAllConnectedNodes(2);
-        assertTrue(connectedToOne.size()==1);
-        assertTrue(connectedToTwo.size()==1);
-        connectedToOne.forEach(node -> assertTrue(node.getId()==2));
-        connectedToTwo.forEach(node -> assertTrue(node.getId()==1));
+        assertTrue(connectedToOne.size() == 1);
+        assertTrue(connectedToTwo.size() == 1);
+        connectedToOne.forEach(node -> assertTrue(node.getId() == 2));
+        connectedToTwo.forEach(node -> assertTrue(node.getId() == 1));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class UndirectedGraphTest {
         graph.add(n2);
         graph.add(n3);
         List<Node> nodes = graph.getAllNodes();
-        assertTrue(nodes.size()==3);
+        assertTrue(nodes.size() == 3);
         assertTrue(nodes.contains(n1));
         assertTrue(nodes.contains(n2));
         assertTrue(nodes.contains(n3));
@@ -90,4 +90,38 @@ public class UndirectedGraphTest {
     public void graph_shouldThrowErrorIfNodeDoesNotExist() throws Exception {
         graph.getNodeById(1);
     }
+
+    @Test(expected = UndirectedGraph.EdgeDoesNotExist.class)
+    public void graph_shouldThrowErrorIfEdgeDoesNotExist() throws Exception {
+        graph.add(new Node(1));
+        graph.add(new Node(2));
+        graph.getEdges(1, 2);
+    }
+
+    @Test(expected = UndirectedGraph.EdgeDoesNotExist.class)
+    public void graph_shouldThrowErrorIfEdgeDoesNotExistButExistsOverAll() throws Exception {
+        graph.add(new Node(1));
+        graph.add(new Node(2));
+        graph.add(new Node(3));
+        graph.createEdge(1, 3);
+        graph.getEdges(1, 2);
+    }
+
+    @Test
+    public void graph_shouldFetchSingleExistingEdgeCorrectly() throws Exception {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        graph.add(n1);
+        graph.add(n2);
+        graph.createEdge(1, 2);
+        Set<Edge> edges = graph.getEdges(1, 2);
+        assertTrue(edges.size() == 1);
+        edges.forEach(edge -> {
+            assertTrue(edge.getEdgeWeight() == 0);
+            assertTrue(edge.getOrigin() == n1);
+            assertTrue(edge.getDestination() == n2);
+        });
+    }
+
+
 }
