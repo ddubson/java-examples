@@ -39,6 +39,7 @@ public class DijkstraShortestPath {
 
         while(!nodes.isEmpty()) {
             Node node = findMinDistNode(nodes, dist);
+            if(node == null) break;
             nodes.remove(node);
 
             for(Node neighbor : graph.getAllConnectedNodes(node.getId())) {
@@ -56,6 +57,7 @@ public class DijkstraShortestPath {
             if(i == source.getId()) { continue; }
             System.out.print(dist[i] + " ");
         }
+        System.out.println();
     }
 
     private static int distanceBetween(UndirectedGraph graph, int nodeId, int neighborId) {
@@ -75,21 +77,21 @@ public class DijkstraShortestPath {
     }
 
     private static Node findMinDistNode(Set<Node> nodes, int[] dist) {
-        Node minNodeId = null;
+        Node minNode = null;
         int shortestDist = INFINITY;
         for(Node n : nodes) {
             if(shortestDist == INFINITY && dist[n.getId()] != INFINITY) {
                 shortestDist = dist[n.getId()];
-                minNodeId = n;
+                minNode = n;
             }
 
             if(dist[n.getId()] < shortestDist && dist[n.getId()] != INFINITY) {
                 shortestDist = dist[n.getId()];
-                minNodeId = n;
+                minNode = n;
             }
         }
 
-        return minNodeId;
+        return minNode;
     }
 
     private static Node setAndRetrieveStartNode(UndirectedGraph graph) {
