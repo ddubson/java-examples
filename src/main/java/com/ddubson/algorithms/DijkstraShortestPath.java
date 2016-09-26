@@ -27,11 +27,11 @@ public class DijkstraShortestPath {
         Set<Node> nodes = new HashSet<>();
         int numOfNodes = graph.getAllNodes().size();
         int[] dist = new int[numOfNodes+1];
-        int[] prev = new int[numOfNodes+1];
+        //int[] prev = new int[numOfNodes+1];
 
         for(Node n : graph.getAllNodes()) {
             dist[n.getId()] = INFINITY;
-            prev[n.getId()] = INFINITY;
+            //prev[n.getId()] = INFINITY;
             nodes.add(n);
         }
 
@@ -48,7 +48,7 @@ public class DijkstraShortestPath {
                 int alt = dist[node.getId()] + distanceBetween(graph, node.getId(), neighbor.getId());
                 if(alt < dist[neighbor.getId()] || dist[neighbor.getId()] == INFINITY) {
                     dist[neighbor.getId()] = alt;
-                    prev[neighbor.getId()] = node.getId();
+                    //prev[neighbor.getId()] = node.getId();
                 }
             }
         }

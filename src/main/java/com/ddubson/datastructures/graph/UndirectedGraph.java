@@ -9,14 +9,15 @@ import static java.util.stream.Collectors.toList;
  * Author: ddubson
  */
 public class UndirectedGraph implements Graph {
-    private Map<Node, Map<Node, Set<Edge>>> adjList;
+    // node <-> node --> edge map
+    private Map<Node, Map<Node, UUID>> adjList;
     private Map<Integer, Node> nodesList;
-    private List<Edge> edgeList;
+    private Map<UUID, Set<Edge>> edgeMap;
 
     public UndirectedGraph() {
         adjList = new HashMap<>();
         nodesList = new HashMap<>();
-        edgeList = new ArrayList<>();
+        edgeMap = new HashMap<>();
     }
 
     public List<Node> getAllNodes() {
@@ -39,9 +40,12 @@ public class UndirectedGraph implements Graph {
         Node n1 = fetchNodeIfExists(node1);
         Node n2 = fetchNodeIfExists(node2);
 
-        return edgeList.stream().filter(edge -> edge.getEdgeWeight() == edgeWeight &&
-                ((edge.getOrigin() == n1 && edge.getDestination() == n2) ||
-                        (edge.getDestination() == n2 && edge.getOrigin() == n1))).findFirst().isPresent();
+        if (adjList.get(n1) == null || adjList.get(n1).get(n2) == null) {
+            return false;
+        }
+
+        return edgeMap.get(adjList.get(n1).get(n2)).stream().filter(edge -> edge.getEdgeWeight() == edgeWeight)
+                .findFirst().isPresent();
     }
 
     private Node fetchNodeIfExists(int node1) {
@@ -53,7 +57,7 @@ public class UndirectedGraph implements Graph {
         Node n1 = fetchNodeIfExists(node1);
         Node n2 = fetchNodeIfExists(node2);
         assumeEdgesExist(n1, n2);
-        return adjList.get(n1).get(n2);
+        return edgeMap.get(adjList.get(n1).get(n2));
     }
 
     private void assumeEdgesExist(Node n1, Node n2) throws EdgeDoesNotExist {
@@ -70,31 +74,19 @@ public class UndirectedGraph implements Graph {
         Node n1 = fetchNodeIfExists(node1);
         Node n2 = fetchNodeIfExists(node2);
 
-        createAdjancencyMapIfNull(n1);
-        createAdjancencyMapIfNull(n2);
-
         Edge edge = new Edge(edgeWeight, n1, n2);
+        if(adjList.get(n1) != null && adjList.get(n1).get(n2) != null) {
+            UUID uuid = adjList.get(n1).get(n2);
+            edgeMap.get(uuid).add(edge);
+        } else {
+            UUID uuid = UUID.randomUUID();
+            edgeMap.putIfAbsent(uuid, new HashSet<>());
+            edgeMap.get(uuid).add(edge);
 
-        Map<Node, Set<Edge>> map = adjList.get(n1);
-        createEdgeMapIfNull(n1, n2, map);
-        map.get(n2).add(edge);
-
-        map = adjList.get(n2);
-        createEdgeMapIfNull(n2, n1, map);
-        map.get(n1).add(edge);
-
-        edgeList.add(edge);
-    }
-
-    private void createEdgeMapIfNull(Node n1, Node n2, Map<Node, Set<Edge>> map) {
-        if (adjList.get(n1).get(n2) == null) {
-            map.put(n2, new HashSet<>());
-        }
-    }
-
-    private void createAdjancencyMapIfNull(Node n1) {
-        if (!adjList.containsKey(n1)) {
-            adjList.put(n1, new HashMap<>());
+            adjList.putIfAbsent(n1, new HashMap<>());
+            adjList.putIfAbsent(n2, new HashMap<>());
+            adjList.get(n1).put(n2, uuid);
+            adjList.get(n2).put(n1, uuid);
         }
     }
 
