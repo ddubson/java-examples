@@ -68,9 +68,6 @@ public class UndirectedGraph implements Graph {
             UUID uuid = UUID.randomUUID();
             edgeMap.putIfAbsent(uuid, new HashSet<>());
             edgeMap.get(uuid).add(edge);
-
-            //adjList.putIfAbsent(n1, new HashMap<>());
-            //adjList.putIfAbsent(n2, new HashMap<>());
             adjList.get(node1).put(node2, uuid);
             adjList.get(node2).put(node1, uuid);
         }

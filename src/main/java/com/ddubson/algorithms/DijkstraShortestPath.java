@@ -17,9 +17,7 @@ public class DijkstraShortestPath {
     public static void main(String[] args) {
         int numOfQueries = scanner.nextInt();
         for (int i = 0; i < numOfQueries; i++) {
-            UndirectedGraph graph = buildGraph();
-            int source = retrieveStartNode();
-            dijkstra(graph, source);
+            dijkstra(buildGraph(), retrieveStartNode());
         }
     }
 
@@ -68,10 +66,6 @@ public class DijkstraShortestPath {
         // get edge(s) between two nodes
         int shortestDistance = INFINITY;
 
-        graph.getEdges(nodeId, neighborId).parallelStream().forEach(edge -> {}
-        );
-
-
         for(Edge e : graph.getEdges(nodeId, neighborId)) {
             if(shortestDistance == INFINITY) {
                 shortestDistance = e.getEdgeWeight();
@@ -107,8 +101,7 @@ public class DijkstraShortestPath {
     }
 
     private static int retrieveStartNode() {
-        int startNodeName = scanner.nextInt();
-        return startNodeName;
+        return scanner.nextInt();
     }
 
     private static UndirectedGraph buildGraph() {
