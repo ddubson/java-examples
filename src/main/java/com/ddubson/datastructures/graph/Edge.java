@@ -5,10 +5,10 @@ package com.ddubson.datastructures.graph;
  */
 public class Edge {
     private int edgeWeight;
-    private Node origin;
-    private Node destination;
+    private int origin;
+    private int destination;
 
-    public Edge(int edgeWeight, Node origin, Node destination) {
+    public Edge(int edgeWeight, int origin, int destination) {
         this.edgeWeight = edgeWeight;
         this.origin = origin;
         this.destination = destination;
@@ -22,11 +22,11 @@ public class Edge {
         return edgeWeight;
     }
 
-    public Node getOrigin() {
+    public int getOrigin() {
         return origin;
     }
 
-    public Node getDestination() {
+    public int getDestination() {
         return destination;
     }
 }

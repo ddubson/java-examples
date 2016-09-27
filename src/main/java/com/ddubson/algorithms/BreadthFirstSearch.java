@@ -1,17 +1,20 @@
 package com.ddubson.algorithms;
-
+/*
 import com.ddubson.datastructures.graph.Node;
 import com.ddubson.datastructures.graph.UndirectedGraph;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
+*/
 /**
  * Author: ddubson
  */
+
 public class BreadthFirstSearch {
-    private static final int DEFAULT_DISTANCE = 6;
+    /*private static final int DEFAULT_DISTANCE = 6;
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -24,10 +27,10 @@ public class BreadthFirstSearch {
     }
 
     private static UndirectedGraph buildGraph() {
-        UndirectedGraph g = new UndirectedGraph();
         int numOfNodes = scanner.nextInt();
         int numOfEdges = scanner.nextInt();
 
+        UndirectedGraph g = new UndirectedGraph(numOfNodes);
         for (int i = 1; i <= numOfNodes; i++) {
             if (!g.nodeExists(i)) {
                 g.add(new Node(i));
@@ -73,7 +76,9 @@ public class BreadthFirstSearch {
             });
         }
 
-        g.getAllNodes().stream().filter(node -> !node.isStartNode()).forEach((node -> System.out.print(node.getDistanceValue() + " ")));
+        g.getAllNodes().stream().filter(node -> !node.isStartNode())
+                .forEach((node -> System.out.print(node.getDistanceValue() + " ")));
         System.out.println();
-    }
+    }*/
 }
+

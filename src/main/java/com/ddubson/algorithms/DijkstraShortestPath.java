@@ -18,43 +18,47 @@ public class DijkstraShortestPath {
         int numOfQueries = scanner.nextInt();
         for (int i = 0; i < numOfQueries; i++) {
             UndirectedGraph graph = buildGraph();
-            Node source = setAndRetrieveStartNode(graph);
+            int source = retrieveStartNode();
             dijkstra(graph, source);
         }
     }
 
-    public static void dijkstra(UndirectedGraph graph, Node source) {
-        Set<Node> nodes = new HashSet<>();
-        int numOfNodes = graph.getAllNodes().size();
+    public static void dijkstra(UndirectedGraph graph, int source) {
+        Set<Integer> nodes = new HashSet<>();
+        int numOfNodes = graph.getNumberOfNodes();
         int[] dist = new int[numOfNodes+1];
         //int[] prev = new int[numOfNodes+1];
 
-        for(Node n : graph.getAllNodes()) {
-            dist[n.getId()] = INFINITY;
+        for(int n : graph.getAllNodes()) {
+            dist[n] = INFINITY;
             //prev[n.getId()] = INFINITY;
             nodes.add(n);
         }
 
-        dist[source.getId()] = 0;
+        dist[source] = 0;
 
         while(!nodes.isEmpty()) {
-            Node node = findMinDistNode(nodes, dist);
-            if(node == null) break;
+            int node;
+            try {
+                node = findMinDistNode(nodes, dist);
+            } catch(NodeNotFound e) {
+                break;
+            }
             nodes.remove(node);
 
-            for(Node neighbor : graph.getAllConnectedNodes(node.getId())) {
+            for(int neighbor : graph.getAllConnectedNodes(node)) {
                 if(!nodes.contains(neighbor)) continue;
 
-                int alt = dist[node.getId()] + distanceBetween(graph, node.getId(), neighbor.getId());
-                if(alt < dist[neighbor.getId()] || dist[neighbor.getId()] == INFINITY) {
-                    dist[neighbor.getId()] = alt;
+                int alt = dist[node] + distanceBetween(graph, node, neighbor);
+                if(alt < dist[neighbor] || dist[neighbor] == INFINITY) {
+                    dist[neighbor] = alt;
                     //prev[neighbor.getId()] = node.getId();
                 }
             }
         }
 
         for (int i = 1; i < dist.length; i++) {
-            if(i == source.getId()) { continue; }
+            if(i == source) { continue; }
             System.out.print(dist[i] + " ");
         }
         System.out.println();
@@ -63,6 +67,11 @@ public class DijkstraShortestPath {
     private static int distanceBetween(UndirectedGraph graph, int nodeId, int neighborId) {
         // get edge(s) between two nodes
         int shortestDistance = INFINITY;
+
+        graph.getEdges(nodeId, neighborId).parallelStream().forEach(edge -> {}
+        );
+
+
         for(Edge e : graph.getEdges(nodeId, neighborId)) {
             if(shortestDistance == INFINITY) {
                 shortestDistance = e.getEdgeWeight();
@@ -76,39 +85,40 @@ public class DijkstraShortestPath {
         return shortestDistance;
     }
 
-    private static Node findMinDistNode(Set<Node> nodes, int[] dist) {
-        Node minNode = null;
+    private static int findMinDistNode(Set<Integer> nodes, int[] dist) throws NodeNotFound {
+        int minNode = INFINITY;
         int shortestDist = INFINITY;
-        for(Node n : nodes) {
-            if(shortestDist == INFINITY && dist[n.getId()] != INFINITY) {
-                shortestDist = dist[n.getId()];
+        for(int n : nodes) {
+            if(shortestDist == INFINITY && dist[n] != INFINITY) {
+                shortestDist = dist[n];
                 minNode = n;
             }
 
-            if(dist[n.getId()] < shortestDist && dist[n.getId()] != INFINITY) {
-                shortestDist = dist[n.getId()];
+            if(dist[n] < shortestDist && dist[n] != INFINITY) {
+                shortestDist = dist[n];
                 minNode = n;
             }
         }
 
-        return minNode;
+        if(minNode == INFINITY) {
+            throw new NodeNotFound();
+        } else
+            return minNode;
     }
 
-    private static Node setAndRetrieveStartNode(UndirectedGraph graph) {
+    private static int retrieveStartNode() {
         int startNodeName = scanner.nextInt();
-        Node n = graph.getNodeById(startNodeName);
-        n.setStartNode(true);
-        return n;
+        return startNodeName;
     }
 
     private static UndirectedGraph buildGraph() {
-        UndirectedGraph g = new UndirectedGraph();
         int numOfNodes = scanner.nextInt();
         int numOfEdges = scanner.nextInt();
 
+        UndirectedGraph g = new UndirectedGraph();
         for (int i = 1; i <= numOfNodes; i++) {
             if (!g.nodeExists(i)) {
-                g.add(new Node(i));
+                g.add(i);
             }
         }
 
@@ -120,6 +130,9 @@ public class DijkstraShortestPath {
         }
 
         return g;
+    }
+
+    private static class NodeNotFound extends Exception {
     }
 }
 
