@@ -86,6 +86,7 @@ public class FactoryProducerTest {
         Color color3 = colorFactory.get("BLUE");
         color3.fill();
 
-        assertEquals("CIRCLE\r\nRECTANGLE\r\nSQUARE\r\nRED\r\nGREEN\r\nBLUE", outContent.toString());
+        assertEquals("CIRCLE" + System.lineSeparator() + "RECTANGLE" + System.lineSeparator() + "SQUARE" + System.lineSeparator() + "RED" +
+                System.lineSeparator() + "GREEN" + System.lineSeparator() + "BLUE", outContent.toString());
     }
 }
