@@ -6,6 +6,6 @@ package com.ddubson.patterns.abstractfactory.shape;
 public class Square implements Shape {
     @Override
     public void draw() {
-        System.out.println("SQUARE");
+        System.out.print("SQUARE");
     }
 }

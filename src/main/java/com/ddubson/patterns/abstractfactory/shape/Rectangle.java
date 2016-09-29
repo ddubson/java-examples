@@ -6,6 +6,6 @@ package com.ddubson.patterns.abstractfactory.shape;
 public class Rectangle implements Shape {
     @Override
     public void draw() {
-        System.out.println("RECTANGLE");
+        System.out.print("RECTANGLE");
     }
 }

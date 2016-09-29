@@ -6,6 +6,6 @@ package com.ddubson.patterns.abstractfactory.color;
 public class Green implements Color {
     @Override
     public void fill() {
-        System.out.println("GREEN");
+        System.out.print("GREEN");
     }
 }

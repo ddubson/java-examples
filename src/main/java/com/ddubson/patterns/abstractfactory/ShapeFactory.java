@@ -12,7 +12,7 @@ public class ShapeFactory extends AbstractFactory<Shape> {
     @Override
     Shape get(String shapeType) {
         if(shapeType == null){
-            return null;
+            throw new ShapeNotFound();
         }
 
         if(shapeType.equalsIgnoreCase("CIRCLE")){
@@ -23,8 +23,11 @@ public class ShapeFactory extends AbstractFactory<Shape> {
 
         }else if(shapeType.equalsIgnoreCase("SQUARE")){
             return new Square();
+        } else {
+            throw new ShapeNotFound();
         }
+    }
 
-        return null;
+    public static class ShapeNotFound extends RuntimeException {
     }
 }
