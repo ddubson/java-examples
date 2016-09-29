@@ -5,9 +5,6 @@ import com.ddubson.patterns.abstractfactory.shape.Rectangle;
 import com.ddubson.patterns.abstractfactory.shape.Shape;
 import com.ddubson.patterns.abstractfactory.shape.Square;
 
-/**
- * Author: ddubson
- */
 public class ShapeFactory extends AbstractFactory<Shape> {
     @Override
     Shape get(String shapeType) {
