@@ -20,34 +20,33 @@ public class Quicksort {
     public static void main(String[] args) {
         int[] input = readInputFromSysIn();
         int[] sorted = quicksort(input, 0, input.length - 1);
-        for (int i = 0; i < sorted.length; i++) {
-            System.out.print(sorted[i] + " ");
-        }
+        printArray(sorted, 0, input.length - 1);
     }
 
     private static int[] quicksort(int[] input, int low, int high) {
-        int[] output = Arrays.copyOf(input, input.length);
         if(low < high) {
-            int p = partition(output, low, high);
-            output = quicksort(output, low, p - 1);
-            output = quicksort(output, p + 1, high);
+            int p = partition(input, low, high);
+            quicksort(input, low, p - 1);
+            printArray(input, low, p -1);
+            quicksort(input, p + 1, high);
+            printArray(input, p+1, high);
         }
 
-        return output;
+
+        return input;
     }
 
     private static int partition(int[] input, int low, int high) {
         int pivot = input[high];
         int i = low;
 
-        for (int j = low; j < high-1; j++) {
+        for (int j = low; j < high; j++) {
             if(input[j] <= pivot) {
                 swap(input, i, j);
                 i++;
             }
         }
         swap(input, high, i);
-
         return i;
     }
 
@@ -55,6 +54,13 @@ public class Quicksort {
         int temp = input[j];
         input[j] = input[i];
         input[i] = temp;
+    }
+
+    private static void printArray(int ar[], int low, int high) {
+        for (int i = low; i <= high; i++) {
+            System.out.print(ar[i] + " ");
+        }
+        System.out.println();
     }
 }
 
