@@ -1,6 +1,5 @@
-package com.ddubson.algorithms.sorts;
+package com.ddubson.algorithms.sort;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**

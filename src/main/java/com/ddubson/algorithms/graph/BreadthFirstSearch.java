@@ -1,4 +1,4 @@
-package com.ddubson.algorithms;
+package com.ddubson.algorithms.graph;
 
 import com.ddubson.datastructures.graph.Node;
 import com.ddubson.datastructures.graph.UndirectedGraph;

@@ -1,10 +1,10 @@
-package com.ddubson.algorithms.sorts;
+package com.ddubson.algorithms.sort;
 
 /**
  * Author: ddubson
  */
 public class InsertionSort {
-    private static int[] insertionsort(int[] array) {
+    public static int[] sort(int[] array) {
         for(int i = 1; i < array.length; i++){
             int j = i;
             while(j > 0 && array[j-1] > array[j]){
@@ -14,13 +14,6 @@ public class InsertionSort {
                 j--;
             }
         }
-
         return array;
-    }
-
-    public static void main(String... args) {
-        int[] array = { 1, 5, 3, 2, 6};
-        int[] sorted = insertionsort(array);
-
     }
 }
