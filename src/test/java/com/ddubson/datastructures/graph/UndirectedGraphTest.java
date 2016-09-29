@@ -3,10 +3,7 @@ package com.ddubson.datastructures.graph;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -106,5 +103,13 @@ public class UndirectedGraphTest {
         });
     }
 
-
+    @Test
+    public void graph_shouldBeAbleToAddMultipleEdges() throws Exception {
+        graph.add(1);
+        graph.add(2);
+        graph.createEdge(1, 2);
+        graph.createEdge(1, 2, 43);
+        assertTrue(graph.edgeExists(1,2));
+        assertTrue(graph.edgeExists(1, 2, 43));
+    }
 }
