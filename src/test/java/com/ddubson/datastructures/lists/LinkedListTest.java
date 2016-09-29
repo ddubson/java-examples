@@ -13,12 +13,4 @@ public class LinkedListTest {
 		list.add("Hello");
 		assertThat(list.size(), equalTo(1));
 	}
-
-	@Test
-	public void storeAndFetchItemInLinkedList() {
-		List<String> list = new LinkedList<>();
-
-		list.add("Hello");
-		//assertThat(list.get(0).equals("Hello"));
-	}
 }

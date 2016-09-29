@@ -19,4 +19,14 @@ public class FactoryProducerTest {
         Object color = FactoryProducer.getFactory("COLOR");
         assertTrue(color instanceof ColorFactory);
     }
+
+    @Test(expected = FactoryProducer.UnknownFactory.class)
+    public void factory_shouldThrowErrorOnUnrecognizedFactory() throws Exception {
+        FactoryProducer.getFactory("SCHPLURG");
+    }
+
+    @Test(expected = FactoryProducer.UnknownFactory.class)
+    public void factory_shouldThrowErrorOnNullRequest() throws Exception {
+        FactoryProducer.getFactory(null);
+    }
 }
