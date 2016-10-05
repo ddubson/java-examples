@@ -17,16 +17,17 @@ import static org.junit.Assert.assertTrue;
  */
 public class FactoryProducerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    ShapeFactory shapeFactory;
+    PrintStream saved;
 
     @Before
     public void setUp() throws Exception {
+        saved = System.out;
         System.setOut(new PrintStream(outContent));
     }
 
     @After
     public void tearDown() throws Exception {
-        System.setOut(null);
+        System.setOut(saved);
     }
 
     @Test
