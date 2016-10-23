@@ -18,8 +18,8 @@ public class PairsGivenSum {
 
         // brute force (run time: O(N*(N-1))
         for (int i = 0; i < sequence.length; i++) {
-            for (int j = i+1; j < sequence.length; j++) {
-                if(sequence[i] + sequence[j] == expectedSum) {
+            for (int j = i + 1; j < sequence.length; j++) {
+                if (sequence[i] + sequence[j] == expectedSum) {
                     System.out.println(String.format("{%d, %d}", sequence[i], sequence[j]));
                 }
             }
@@ -34,11 +34,11 @@ public class PairsGivenSum {
             map.put(sequence[i], i);
         }
 
-        for(int val : map.keySet()) {
-            if(sequence[map.get(val)] == -1) continue;
+        for (int val : map.keySet()) {
+            if (sequence[map.get(val)] == -1) continue;
 
-            if(map.containsKey(expectedSum-val) && sequence[map.get(expectedSum-val)] != -1) {
-                System.out.println(String.format("{%d, %d}", val, expectedSum-val));
+            if (map.containsKey(expectedSum - val) && sequence[map.get(expectedSum - val)] != -1) {
+                System.out.println(String.format("{%d, %d}", val, expectedSum - val));
                 sequence[map.get(val)] = -1;
             }
         }
