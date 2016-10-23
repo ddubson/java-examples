@@ -1,22 +1,51 @@
 package com.ddubson.algorithms.sort;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * Author: ddubson
+ * https://www.cs.usfca.edu/~galles/visualization/CountingSort.html
  */
 public class CountingSort {
-    public static int[] countingSort(int[] arr) {
-        if(arr.length == 0)
-            return new int[0];
+    public static void countingSort(int[] arr, String[] str) {
+        if (assumeNonEmpty(arr)) return;
 
-        int[] countArr = new int[arr.length];
+        // Get histogram of counts
+        int[] countArr = new int[arr.length+1];
         for (int i = 0; i < arr.length; i++) {
             countArr[arr[i]]++;
         }
 
-        return countArr;
+        // Get starting positions
+        for (int i = 1; i < arr.length; i++) {
+            countArr[i] += countArr[i-1];
+        }
+
+        String[] outStr = new String[arr.length];
+        int[] ogIndex = new int[arr.length];
+        for (int i = outStr.length-1; i > -1; i--) {
+            outStr[countArr[arr[i]]-1] = str[i];
+            ogIndex[countArr[arr[i]]-1] = i;
+            countArr[arr[i]]--;
+        }
+
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < arr.length; i++) {
+            if(ogIndex[i] < arr.length/2) {
+                s.append("- ");
+            } else {
+                s.append(outStr[i]).append(" ");
+            }
+        }
+        System.out.println(s.toString());
+    }
+
+    private static boolean assumeNonEmpty(int[] arr) {
+        if (arr.length == 0) {
+            System.out.println("");
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -24,11 +53,12 @@ public class CountingSort {
         int n = scanner.nextInt();
 
         int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
+        String[] str = new String[n];
+        for (int i = 0; i < arr.length; i++) {
             arr[i] = scanner.nextInt();
+            str[i] = scanner.next();
         }
 
-        int[] count = countingSort(arr);
-        Arrays.stream(count).forEach(c -> System.out.print(c + " "));
+        countingSort(arr, str);
     }
 }

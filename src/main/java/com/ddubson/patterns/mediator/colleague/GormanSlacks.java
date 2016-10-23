@@ -9,6 +9,6 @@ import com.ddubson.patterns.mediator.mediator.Mediator;
 public class GormanSlacks extends Colleague {
     public GormanSlacks(Mediator mediator) {
         super(mediator);
-        System.out.println("JT Poorman signed up with the exchange.");
+        System.out.println("Gorman Slacks signed up with the exchange.");
     }
 }
