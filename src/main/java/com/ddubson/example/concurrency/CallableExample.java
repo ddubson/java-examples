@@ -18,10 +18,7 @@ public class CallableExample {
 
         // Submit callable for processing, and wait for response
         Future<Integer> number = service.submit(getNumber);
-        System.out.print("Waiting");
-        while(!number.isDone()) {
-        }
-
-        System.out.println("\n"+number.get());
+        System.out.println("Waiting");
+        System.out.println("Result: "+number.get());
     }
 }
