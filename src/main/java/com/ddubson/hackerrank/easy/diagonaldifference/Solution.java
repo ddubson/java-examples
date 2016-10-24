@@ -6,7 +6,7 @@ import java.util.*;
 public class Solution {
 
 	public static void main(String[] args) throws IOException {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named RansomNote. */
 		BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
 		final int n = Integer.valueOf(r.readLine());
 		int[][] matrix = new int[n][n];
