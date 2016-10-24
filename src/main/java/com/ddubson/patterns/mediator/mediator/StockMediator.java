@@ -37,9 +37,8 @@ public class StockMediator implements Mediator {
 
         if (offer.isPresent()) {
             System.out
-                    .println(shares + " shares of " + stock
-                            + " sold to colleague code "
-                            + offer.get().getColleagueCode());
+                    .println(String.format("%d shares of %s sold to colleague code %d"
+                            , shares, stock, offer.get().getColleagueCode()));
 
             stockBuyOffers.remove(offer.get());
         } else {
