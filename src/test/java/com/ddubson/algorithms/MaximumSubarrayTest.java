@@ -8,6 +8,6 @@ import org.junit.Test;
 public class MaximumSubarrayTest {
     @Test
     public void maxset_emptyList() throws Exception {
-        assertEquals()
+
     }
 }
