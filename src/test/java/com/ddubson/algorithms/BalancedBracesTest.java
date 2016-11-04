@@ -2,7 +2,7 @@ package com.ddubson.algorithms;
 
 import org.junit.Test;
 
-import static com.ddubson.algorithms.BalancedBraces.isBalanced;
+import static com.ddubson.algorithms.stacks_queues.BalancedBraces.isBalanced;
 import static org.junit.Assert.*;
 
 /**

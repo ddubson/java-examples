@@ -1,4 +1,4 @@
-package com.ddubson.hackerrank.moderate.queuetwostacks;
+package com.ddubson.algorithms.stacks_queues;
 
 import java.util.Scanner;
 import java.util.Stack;
@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * Author: ddubson
  */
-public class Solution {
+public class QueueWithTwoStacks {
     static final int ENQUEUE = 1, DEQUEUE = 2, PRINT = 3;
 
     public static void main(String[] args) {
