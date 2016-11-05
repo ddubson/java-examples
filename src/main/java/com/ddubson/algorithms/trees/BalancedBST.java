@@ -1,4 +1,6 @@
-package com.ddubson.datastructures.trees;
+package com.ddubson.algorithms.trees;
+
+import com.ddubson.datastructures.trees.TreeNode;
 
 /**
  * Created by ddubson on 2/16/16.
