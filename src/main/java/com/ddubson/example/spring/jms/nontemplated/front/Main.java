@@ -1,4 +1,5 @@
-package com.ddubson.example.spring.jms.back;
+package com.ddubson.example.spring.jms.nontemplated.front;
+
 
 import com.ddubson.example.spring.jms.Mail;
 import com.ddubson.example.spring.jms.provider.ActiveMqJMSProvider;
@@ -11,10 +12,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        BackOffice backOffice = context.getBean("backOffice", BackOffice.class);
-        Mail mail = backOffice.receiveMail();
-        System.out.println("Mail #" + mail.getMailId() + " received.");
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext(Main.class);
+        context.getBean("frontDesk", FrontDesk.class).sendMail(new Mail("1234", "US", 1.5));
+        System.out.println("Mail sent.");
+
     }
 
     @Bean
@@ -23,7 +25,7 @@ public class Main {
     }
 
     @Bean
-    public BackOffice backOffice() {
-        return new BackOfficeConsumer(jmsProvider());
+    public FrontDesk frontDesk() {
+        return new FrontDeskProducer(jmsProvider());
     }
 }

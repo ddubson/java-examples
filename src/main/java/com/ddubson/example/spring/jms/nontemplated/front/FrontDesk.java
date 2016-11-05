@@ -1,4 +1,4 @@
-package com.ddubson.example.spring.jms.front;
+package com.ddubson.example.spring.jms.nontemplated.front;
 
 
 import com.ddubson.example.spring.jms.Mail;

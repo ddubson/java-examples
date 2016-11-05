@@ -1,4 +1,4 @@
-package com.ddubson.example.spring.jms.back;
+package com.ddubson.example.spring.jms.nontemplated.back;
 
 import com.ddubson.example.spring.jms.Mail;
 import com.ddubson.example.spring.jms.provider.JMSProvider;
