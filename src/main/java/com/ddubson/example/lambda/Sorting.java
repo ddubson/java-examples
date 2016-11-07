@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 /**
  * Author: ddubson
  */
-public class ListSort {
+public class Sorting {
     public static List<String> sortByLength(List<String> input) {
         return input
                 .stream()
-                .sorted((s1, s2) -> s1.length() > s2.length() ? 1 : -1)
+                .sorted((s1, s2) -> s1.length() - s2.length())
                 .collect(Collectors.toList());
     }
 }
