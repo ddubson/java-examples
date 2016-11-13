@@ -1,4 +1,4 @@
-package com.ddubson.algorithms;
+package com.ddubson.algorithms.stacks_queues;
 
 import java.util.Stack;
 

@@ -1,8 +1,8 @@
-package com.ddubson.algorithms;
+package com.ddubson.algorithms.arrays_lists;
 
 import org.junit.Test;
 
-import static com.ddubson.algorithms.ReverseArray1.reverseAlphabeticChars;
+import static com.ddubson.algorithms.arrays_lists.ReverseArray1.reverseAlphabeticChars;
 import static org.junit.Assert.*;
 
 /**

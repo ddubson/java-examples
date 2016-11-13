@@ -1,4 +1,4 @@
-package com.ddubson.algorithms;
+package com.ddubson.algorithms.arrays_lists;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.ddubson.algorithms;
+package com.ddubson.algorithms.arrays_lists;
 
 /**
  * Created by ddubson on 10/20/2016.
