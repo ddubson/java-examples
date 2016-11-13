@@ -83,17 +83,4 @@ public class ReverseKGroups {
         }
         return size;
     }
-
-    public static class ListNode {
-        public ListNode next;
-        public final int val;
-
-        public ListNode(int val) {
-            this.val = val;
-        }
-
-        public String toString() {
-            return this.val + (next != null ? "->" + this.next : "");
-        }
-    }
 }
