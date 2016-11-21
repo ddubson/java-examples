@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar spring-boot/boot-simple/build/libs/boot-simple.jar
