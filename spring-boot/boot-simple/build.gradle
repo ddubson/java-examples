@@ -8,6 +8,14 @@ repositories {
     mavenCentral()
 }
 
+task stage {
+    dependsOn build
+}
+
+jar {
+    baseName = 'boot-simple'
+}
+
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.4.2.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
