@@ -1,2 +1,6 @@
 rootProject.name = 'code-dojo-java'
+include 'spring-cloud-refresh-scope'
+findProject(':spring-cloud-refresh-scope')?.name = 'spring-cloud-refresh-scope-example'
+include 'design-patterns'
+include 'core-java'
 

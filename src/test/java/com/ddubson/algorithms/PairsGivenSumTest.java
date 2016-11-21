@@ -2,8 +2,8 @@ package com.ddubson.algorithms;
 
 import org.junit.Test;
 
-import static com.ddubson.algorithms.PairsGivenSum.pairsGivenSum2;
-import static org.junit.Assert.*;
+import static com.ddubson.algorithms.arrays_lists.PairsGivenSum.pairsGivenSum2;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by ddubs on 10/27/2016.

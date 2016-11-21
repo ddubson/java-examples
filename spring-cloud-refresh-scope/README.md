@@ -1,0 +1,1 @@
+Refreshing beans without reloading the server example.

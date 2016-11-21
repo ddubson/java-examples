@@ -1,15 +1,13 @@
 package com.ddubson.algorithms.linked_list;
 
-import org.junit.Test;
-
 import static com.ddubson.algorithms.linked_list.RemoveNthFromTail.removeNth;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by ddubs on 10/27/2016.
  */
 public class RemoveNthFromTailTest {
-    @Test
+    //@Test
     public void removeTest() throws Exception {
         // base case: empty/null list
         assertEquals(null, removeNth(nullList(), 1));
