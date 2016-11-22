@@ -5,4 +5,5 @@ include 'design-patterns'
 include 'core-java'
 include 'spring-boot'
 include 'spring-boot:boot-simple'
-
+include 'spring-session'
+include 'spring-session:redis-session'
