@@ -1,5 +1,7 @@
 package concepts.structures.queue;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by ddubs on 11/23/2016.
  */
@@ -8,11 +10,11 @@ public interface Queue<E> {
 
     boolean isEmpty();
 
-    void enqueue(E e);
+    void enqueue(E e) throws IllegalStateException;
 
     /** aka peek() - view but do not remove first element **/
-    E first();
+    E first() throws NoSuchElementException;
 
     /** remove the first element and return it back to caller **/
-    E dequeue();
+    E dequeue() throws NoSuchElementException;
 }
