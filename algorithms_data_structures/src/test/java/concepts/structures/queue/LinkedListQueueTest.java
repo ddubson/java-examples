@@ -5,10 +5,10 @@ import org.junit.Before;
 /**
  * Author: ddubson
  */
-public class ArrayQueueTest extends AbstractQueueTest {
+public class LinkedListQueueTest extends AbstractQueueTest{
     @Before
     public void setUp() throws Exception {
-        this.queue = new ArrayQueue<>(getCapacity());
+        this.queue = new LinkedListQueue<>(getCapacity());
     }
 
     @Override
