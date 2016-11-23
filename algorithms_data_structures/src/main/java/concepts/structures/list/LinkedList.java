@@ -1,4 +1,4 @@
-package com.ddubson.datastructures.lists;
+package concepts.structures.list;
 
 public class LinkedList<T> implements List<T> {
 	private int size;

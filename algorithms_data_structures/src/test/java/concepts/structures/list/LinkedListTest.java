@@ -1,4 +1,4 @@
-package com.ddubson.datastructures.lists;
+package concepts.structures.list;
 
 import org.junit.Test;
 

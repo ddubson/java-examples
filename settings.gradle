@@ -9,3 +9,5 @@ include 'spring-session'
 include 'spring-session:redis-session'
 include 'spring-data'
 include 'spring-data:spring-data-mongo-simple'
+include 'algorithms_data_structures'
+

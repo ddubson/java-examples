@@ -1,4 +1,4 @@
-package com.ddubson.datastructures.lists;
+package concepts.structures.list;
 
 /**
  * Created by d.dubson on 2/22/2016.
