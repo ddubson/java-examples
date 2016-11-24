@@ -6,7 +6,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 public abstract class AbstractLinkedListTest {
-    protected LinkedList<String> list;
+    protected CircularlyLinkedList<String> list;
 
     @Test
     public void linkedList_shouldHaveSize0WhenEmpty() throws Exception {
@@ -65,5 +65,38 @@ public abstract class AbstractLinkedListTest {
         list.addFirst("Hello");
         assertThat(list.removeFirst(), equalTo("Hello"));
         assertTrue(list.size()==0);
+    }
+
+    @Test
+    public void linkedList_emptyListRotatedShouldDoNothing() throws Exception {
+        list.rotate();
+        assertThat(list.size(), equalTo(0));
+    }
+
+    @Test
+    public void linkedList_singleElementListRotatedShouldDoNothing() throws Exception {
+        list.addLast("Hey");
+        list.rotate();
+        assertThat(list.first(), equalTo("Hey"));
+        assertThat(list.size(), equalTo(1));
+    }
+
+    @Test
+    public void linkedList_multipleElementListRotatedShouldBeDoneCorrectly() throws Exception {
+        list.addFirst("Hey");
+        list.addLast("You");
+        list.rotate(); // You, Hey
+        assertThat(list.first(), equalTo("You"));
+        assertThat(list.last(), equalTo("Hey"));
+        list.rotate(); // Hey, You
+        assertThat(list.first(), equalTo("Hey"));
+        assertThat(list.last(), equalTo("You"));
+        list.addLast("Again"); // Hey, You, Again
+        list.rotate(); // You, Again, Hey
+        assertThat(list.first(), equalTo("You"));
+        assertThat(list.last(), equalTo("Hey"));
+        list.rotate(); // Again, Hey, You
+        assertThat(list.first(), equalTo("Again"));
+        assertThat(list.last(), equalTo("You"));
     }
 }

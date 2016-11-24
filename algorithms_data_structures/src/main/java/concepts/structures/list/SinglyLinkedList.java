@@ -1,6 +1,6 @@
 package concepts.structures.list;
 
-public class SinglyLinkedList<T> implements LinkedList<T> {
+public class SinglyLinkedList<T> implements CircularlyLinkedList<T>, LinkedList<T> {
     Node<T> head = null;
     Node<T> tail = null;
     private int size;
@@ -66,5 +66,18 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    @Override
+    public void rotate() {
+        if(head == null || head.getNext() == null) {
+            return;
+        }
+
+        Node<T> toMove = head;
+        head = head.getNext();
+
+        tail.setNext(toMove);
+        tail = toMove;
     }
 }
