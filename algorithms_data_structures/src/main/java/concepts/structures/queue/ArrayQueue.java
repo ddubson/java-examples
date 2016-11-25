@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 /**
  * Author: ddubson
  */
-public class ArrayQueue<E> implements Queue<E> {
+public class ArrayQueue<E> implements CircularQueue<E> {
     private final E[] queue;
     private int size;
     private int frontElementIndex;
@@ -54,5 +54,11 @@ public class ArrayQueue<E> implements Queue<E> {
         frontElementIndex = (frontElementIndex + 1) % queue.length;
         size--;
         return toRemove;
+    }
+
+    @Override
+    public void rotate() {
+        if(isEmpty() || size()==1) return;
+        enqueue(dequeue());
     }
 }
