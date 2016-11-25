@@ -1,6 +1,8 @@
 package concepts.structures.list;
 
-public class SinglyLinkedList<T> implements CircularlyLinkedList<T>, LinkedList<T> {
+import concepts.structures.list.node.Node;
+
+public class SinglyLinkedList<T> implements CircularlyLinkedList<T> {
     Node<T> head = null;
     Node<T> tail = null;
     private int size;

@@ -1,11 +1,11 @@
-package concepts.structures.list;
+package concepts.structures.list.node;
 
 /**
  * Created by d.dubson on 2/22/2016.
  */
 public class Node<T> {
-	T item;
-	Node<T> next;
+	private T item;
+	private Node<T> next;
 
 	public T getItem() {
 		return item;
