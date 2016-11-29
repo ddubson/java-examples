@@ -1,34 +1,22 @@
 package concepts.structures.list;
 
-public class LinkedList<T> implements List<T> {
-	private int size;
-	Node<T> firstNode;
-	Node<T> lastNode;
+/**
+ * Author: ddubson
+ */
+public interface LinkedList<T> {
+    void addFirst(T item);
 
-	public LinkedList() {
-		this.size = 0;
-	}
+    void addLast(T item);
 
-	public void add(T item) {
-		Node<T> n = new Node<>();
-		n.setItem(item);
+    T first();
 
-		// If the size of the linked list is 0, then set the new node as the first node
-		// and set next in the node as null
-		if(size < 1) {
-			n.setNext(null);
-			firstNode = n;
-			lastNode = firstNode;
-		}
+    T last();
 
-		size++;
-	}
+    T removeFirst();
 
-	public T get(int index) {
-		return null;
-	}
+    int size();
 
-	public int size() {
-		return this.size;
-	}
+    boolean isEmpty();
+
+
 }
