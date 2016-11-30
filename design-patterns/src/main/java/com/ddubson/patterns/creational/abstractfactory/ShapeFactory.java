@@ -1,9 +1,9 @@
-package com.ddubson.patterns.abstractfactory;
+package com.ddubson.patterns.creational.abstractfactory;
 
-import com.ddubson.patterns.abstractfactory.shape.Circle;
-import com.ddubson.patterns.abstractfactory.shape.Rectangle;
-import com.ddubson.patterns.abstractfactory.shape.Shape;
-import com.ddubson.patterns.abstractfactory.shape.Square;
+import com.ddubson.patterns.creational.abstractfactory.shape.Circle;
+import com.ddubson.patterns.creational.abstractfactory.shape.Rectangle;
+import com.ddubson.patterns.creational.abstractfactory.shape.Shape;
+import com.ddubson.patterns.creational.abstractfactory.shape.Square;
 
 public class ShapeFactory extends AbstractFactory<Shape> {
     @Override

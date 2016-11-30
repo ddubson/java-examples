@@ -1,9 +1,9 @@
-package com.ddubson.patterns.abstractfactory;
+package com.ddubson.patterns.creational.abstractfactory;
 
-import com.ddubson.patterns.abstractfactory.color.Blue;
-import com.ddubson.patterns.abstractfactory.color.Color;
-import com.ddubson.patterns.abstractfactory.color.Green;
-import com.ddubson.patterns.abstractfactory.color.Red;
+import com.ddubson.patterns.creational.abstractfactory.color.Blue;
+import com.ddubson.patterns.creational.abstractfactory.color.Color;
+import com.ddubson.patterns.creational.abstractfactory.color.Green;
+import com.ddubson.patterns.creational.abstractfactory.color.Red;
 
 /**
  * Author: ddubson

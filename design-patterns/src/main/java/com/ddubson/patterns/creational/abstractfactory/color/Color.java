@@ -1,4 +1,4 @@
-package com.ddubson.patterns.abstractfactory.color;
+package com.ddubson.patterns.creational.abstractfactory.color;
 
 /**
  * Author: ddubson
