@@ -10,4 +10,6 @@ include 'spring-session:redis-session'
 include 'spring-data'
 include 'spring-data:spring-data-mongo-simple'
 include 'algorithms_data_structures'
+include 'messaging-and-integration'
+include 'messaging-and-integration:spring-amqp-rabbitmq'
 
