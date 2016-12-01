@@ -1,6 +1,5 @@
 package com.ddubson.patterns.creational.factory;
 
-import com.ddubson.patterns.creational.factory.domain.MazeGame;
 import org.junit.Test;
 
 /**

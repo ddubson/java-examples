@@ -3,7 +3,6 @@ package com.ddubson.patterns.creational.factory;
 import com.ddubson.patterns.creational.common.Room;
 import com.ddubson.patterns.creational.common.Wall;
 import com.ddubson.patterns.creational.factory.domain.BombedWall;
-import com.ddubson.patterns.creational.factory.domain.MazeGame;
 import com.ddubson.patterns.creational.factory.domain.RoomWithABomb;
 
 /**

@@ -1,4 +1,4 @@
-package com.ddubson.patterns.creational.factory.domain;
+package com.ddubson.patterns.creational.factory;
 
 import com.ddubson.patterns.creational.common.Door;
 import com.ddubson.patterns.creational.common.Maze;

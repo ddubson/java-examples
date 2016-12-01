@@ -4,7 +4,6 @@ import com.ddubson.patterns.creational.common.Door;
 import com.ddubson.patterns.creational.common.Room;
 import com.ddubson.patterns.creational.factory.domain.DoorNeedingSpell;
 import com.ddubson.patterns.creational.factory.domain.EnchantedRoom;
-import com.ddubson.patterns.creational.factory.domain.MazeGame;
 import com.ddubson.patterns.creational.factory.domain.Spell;
 
 /**
