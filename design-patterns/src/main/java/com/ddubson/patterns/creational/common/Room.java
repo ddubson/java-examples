@@ -10,6 +10,7 @@ public class Room implements MapSite {
     public Room(int roomNumber) {
         this.roomNumber = roomNumber;
         this.sides = new MapSite[4];
+        System.out.println("Created room #" + roomNumber);
     }
 
     public MapSite getSide(Direction direction) {
