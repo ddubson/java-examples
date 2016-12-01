@@ -1,4 +1,4 @@
-package com.ddubson.patterns.abstractfactory.shape;
+package com.ddubson.patterns.creational.abstractfactory.shape;
 
 /**
  * Author: ddubson

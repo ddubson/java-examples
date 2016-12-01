@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
  */
 public abstract class AbstractQueueTest {
     abstract int getCapacity();
-    protected Queue<String> queue;
+    protected CircularQueue<String> queue;
 
     @Test
     public void queue_shouldBeEmptyWhenInstantiated() throws Exception {
@@ -68,5 +68,28 @@ public abstract class AbstractQueueTest {
     @Test(expected = NoSuchElementException.class)
     public void queue_shouldThrowNoSuchElementExceptionWhenFirstIsCalledOnAnEmptyQueue() throws Exception {
         queue.first();
+    }
+
+    @Test
+    public void queue_shouldDoNothingUponRotateIfEmptyQueue() throws Exception {
+        queue.rotate();
+        assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void queue_shouldRotateElementsSuccessfully() throws Exception {
+        queue.enqueue("Hello");
+        queue.enqueue("There");
+        queue.enqueue("!!");
+        assertThat(queue.first(), equalTo("Hello"));
+        assertThat(queue.size(), equalTo(3));
+
+        queue.rotate();
+        assertThat(queue.first(), equalTo("There"));
+        assertThat(queue.size(), equalTo(3));
+
+        queue.rotate();
+        assertThat(queue.first(), equalTo("!!"));
+        assertThat(queue.size(), equalTo(3));
     }
 }

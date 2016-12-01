@@ -1,7 +1,7 @@
-package com.ddubson.patterns.abstractfactory;
+package com.ddubson.patterns.creational.abstractfactory;
 
-import com.ddubson.patterns.abstractfactory.color.Color;
-import com.ddubson.patterns.abstractfactory.shape.Shape;
+import com.ddubson.patterns.creational.abstractfactory.color.Color;
+import com.ddubson.patterns.creational.abstractfactory.shape.Shape;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
