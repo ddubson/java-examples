@@ -1,4 +1,4 @@
-package com.ddubson.patterns.creational.factory.domain;
+package com.ddubson.patterns.creational.common;
 
 import com.ddubson.patterns.creational.common.Door;
 import com.ddubson.patterns.creational.common.Room;

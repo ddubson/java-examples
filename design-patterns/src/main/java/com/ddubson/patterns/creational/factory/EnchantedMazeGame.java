@@ -2,9 +2,9 @@ package com.ddubson.patterns.creational.factory;
 
 import com.ddubson.patterns.creational.common.Door;
 import com.ddubson.patterns.creational.common.Room;
-import com.ddubson.patterns.creational.factory.domain.DoorNeedingSpell;
-import com.ddubson.patterns.creational.factory.domain.EnchantedRoom;
-import com.ddubson.patterns.creational.factory.domain.Spell;
+import com.ddubson.patterns.creational.common.DoorNeedingSpell;
+import com.ddubson.patterns.creational.common.EnchantedRoom;
+import com.ddubson.patterns.creational.common.Spell;
 
 /**
  * Created by ddubs on 12/1/2016.
