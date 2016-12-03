@@ -1,26 +1,32 @@
-package com.ddubson.example.spring.jms.templated;
+package spring.jms.templated;
 
-import com.ddubson.example.spring.jms.provider.ActiveMqJMSProvider;
-import com.ddubson.example.spring.jms.provider.JMSProvider;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
+import spring.jms.provider.ActiveMqJMSProvider;
+import spring.jms.provider.JMSProvider;
+
+import javax.jms.MessageListener;
 
 /**
  * Author: ddubson
  */
-@Configuration
+@SpringBootApplication
 public class Main {
+    @Autowired
+    Sender sender;
+
     public static void main(String[] args) {
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext(Main.class);
+        SpringApplication.run(Main.class, args);
+    }
 
-        context.getBean("sender", Sender.class).simpleSend();
-
-
+    @Bean
+    public CommandLineRunner app() {
+        return (args) -> sender.simpleSend();
     }
 
     @Bean
@@ -39,8 +45,8 @@ public class Main {
     }
 
     @Bean
-    public Receiver receiver() {
-        return new Receiver();
+    public MessageListener receiver() {
+        return (message) -> System.out.println("Received msg: " + message.toString());
     }
 
     @Bean
