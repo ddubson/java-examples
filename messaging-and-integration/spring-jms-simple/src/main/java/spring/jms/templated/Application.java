@@ -16,12 +16,12 @@ import javax.jms.MessageListener;
  * Author: ddubson
  */
 @SpringBootApplication
-public class Main {
+public class Application {
     @Autowired
     Sender sender;
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean

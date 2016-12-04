@@ -1,22 +1,31 @@
-package com.ddubson.example.spring.jms.nontemplated.front;
+package spring.jms.nontemplated.front;
 
-
-import com.ddubson.example.spring.jms.Mail;
-import com.ddubson.example.spring.jms.provider.ActiveMqJMSProvider;
-import com.ddubson.example.spring.jms.provider.JMSProvider;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import spring.jms.Mail;
+import spring.jms.provider.ActiveMqJMSProvider;
+import spring.jms.provider.JMSProvider;
 
 @Configuration
+@SpringBootApplication
 public class Main {
-    public static void main(String[] args) {
-        ApplicationContext context =
-                new AnnotationConfigApplicationContext(Main.class);
-        context.getBean("frontDesk", FrontDesk.class).sendMail(new Mail("1234", "US", 1.5));
-        System.out.println("Mail sent.");
+    @Autowired
+    FrontDesk frontDesk;
 
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner app() {
+        return (args) -> {
+            frontDesk.sendMail(new Mail("1234", "US", 1.5));
+            System.out.println("Mail sent.");
+        };
     }
 
     @Bean

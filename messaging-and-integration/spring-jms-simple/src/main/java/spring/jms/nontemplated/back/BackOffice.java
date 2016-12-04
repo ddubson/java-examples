@@ -1,7 +1,8 @@
-package com.ddubson.example.spring.jms.nontemplated.back;
+package spring.jms.nontemplated.back;
 
-import com.ddubson.example.spring.jms.Mail;
+import spring.jms.Mail;
 
+@FunctionalInterface
 public interface BackOffice {
 	Mail receiveMail();
 }

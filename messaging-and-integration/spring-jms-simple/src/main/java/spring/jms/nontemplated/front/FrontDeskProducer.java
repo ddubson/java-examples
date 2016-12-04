@@ -1,7 +1,7 @@
-package com.ddubson.example.spring.jms.nontemplated.front;
+package spring.jms.nontemplated.front;
 
-import com.ddubson.example.spring.jms.Mail;
-import com.ddubson.example.spring.jms.provider.JMSProvider;
+import spring.jms.Mail;
+import spring.jms.provider.JMSProvider;
 
 import javax.jms.*;
 

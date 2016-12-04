@@ -1,4 +1,4 @@
-package com.ddubson.example.spring.jms.provider;
+package spring.jms.provider;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;

@@ -1,4 +1,4 @@
-package com.ddubson.example.spring.jms;
+package spring.jms;
 
 public class Mail {
     private String mailId;
@@ -38,4 +38,12 @@ public class Mail {
         this.weight = weight;
     }
 
+    @Override
+    public String toString() {
+        return "Mail{" +
+                "mailId='" + mailId + '\'' +
+                ", country='" + country + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }

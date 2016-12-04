@@ -1,7 +1,7 @@
-package com.ddubson.example.spring.jms.templated;
+package spring.jms.templated;
 
-import com.ddubson.example.spring.jms.provider.JMSProvider;
 import org.springframework.jms.core.JmsTemplate;
+import spring.jms.provider.JMSProvider;
 
 /**
  * Author: ddubson

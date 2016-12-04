@@ -1,20 +1,31 @@
-package com.ddubson.example.spring.jms.nontemplated.back;
+package spring.jms.nontemplated.back;
 
-import com.ddubson.example.spring.jms.Mail;
-import com.ddubson.example.spring.jms.provider.ActiveMqJMSProvider;
-import com.ddubson.example.spring.jms.provider.JMSProvider;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import spring.jms.Mail;
+import spring.jms.provider.ActiveMqJMSProvider;
+import spring.jms.provider.JMSProvider;
 
 @Configuration
+@SpringBootApplication
 public class Main {
+    @Autowired
+    BackOffice backOffice;
+
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        BackOffice backOffice = context.getBean("backOffice", BackOffice.class);
-        Mail mail = backOffice.receiveMail();
-        System.out.println("Mail #" + mail.getMailId() + " received.");
+        SpringApplication.run(Main.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner app() {
+        return (args) -> {
+            Mail mail = backOffice.receiveMail();
+            System.out.println("Mail received. " + mail);
+        };
     }
 
     @Bean

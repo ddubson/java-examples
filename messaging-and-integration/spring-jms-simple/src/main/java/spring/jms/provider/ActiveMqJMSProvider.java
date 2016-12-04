@@ -1,4 +1,4 @@
-package com.ddubson.example.spring.jms.provider;
+package spring.jms.provider;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;

@@ -1,10 +1,11 @@
-package com.ddubson.example.spring.jms.nontemplated.front;
+package spring.jms.nontemplated.front;
 
 
-import com.ddubson.example.spring.jms.Mail;
 import org.springframework.stereotype.Component;
+import spring.jms.Mail;
 
 @Component
+@FunctionalInterface
 public interface FrontDesk {
-	public void sendMail(Mail mail);
+    void sendMail(Mail mail);
 }

@@ -6,3 +6,5 @@ build/
 classes/
 **/build/
 target/
+.DS_Store
+.project
