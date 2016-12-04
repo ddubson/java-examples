@@ -1,9 +1,7 @@
 package app;
 
-import app.model.Person;
 import app.view.PersonOverviewController;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.springframework.boot.CommandLineRunner;
@@ -12,38 +10,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 
-import static javafx.collections.FXCollections.observableArrayList;
-
 @SpringBootApplication
 public class FXApplication extends Application implements CommandLineRunner {
-    public LayoutConfig layoutConfig;
+    private LayoutConfig layoutConfig;
     private Stage primaryStage;
-    private ObservableList<Person> personData;
-
-    public FXApplication() {
-        personData = observableArrayList();
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
-    }
+    private SampleData data;
 
     public static void main(String[] args) {
         SpringApplication.run(FXApplication.class, args);
     }
 
-    public ObservableList<Person> getPersonData() {
-        return personData;
-    }
-
     @Override
     public void start(Stage primaryStage) {
         this.layoutConfig = new LayoutConfig();
+        this.data = new SampleData();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
 
@@ -69,6 +49,10 @@ public class FXApplication extends Application implements CommandLineRunner {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public SampleData getData() {
+        return data;
     }
 
     @Override
