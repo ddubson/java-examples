@@ -27,4 +27,8 @@ public class SampleData {
     public ObservableList<Person> getPersonData() {
         return personData;
     }
+
+    public void add(Person person) {
+        this.personData.add(person);
+    }
 }
