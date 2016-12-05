@@ -6,6 +6,7 @@ import app.view.PersonOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.boot.CommandLineRunner;
@@ -30,7 +31,9 @@ public class FXApplication extends Application implements CommandLineRunner {
     public void start(Stage primaryStage) {
         this.layoutConfig = new LayoutConfig();
         this.data = new SampleData();
+
         this.primaryStage = primaryStage;
+        this.primaryStage.getIcons().add(new Image("/images/app_icon_32.png"));
         this.primaryStage.setTitle("AddressApp");
 
         FXMLLoader rootLoader = layoutConfig.rootLayoutLoader();
