@@ -1,0 +1,1 @@
+Run `FXApplication` to start app
