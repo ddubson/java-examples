@@ -1,65 +1,28 @@
 package app;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
-import java.io.IOException;
 import java.net.URL;
 
 /**
  * Author: ddubson
  */
 public class LayoutConfig {
-    private URL personEditDialogURI = this.getClass().getResource("/app/view/PersonEditDialog.fxml");
-
-    private FXMLLoader personOverviewLoader;
-    private FXMLLoader personEditDialogLoader;
-    private FXMLLoader rootLayoutLoader;
-
-    private BorderPane rootLayout;
-    private AnchorPane personOverview;
-    private AnchorPane personEditDialog;
+    private static final String ROOT_VIEW_DIR = "/app/view";
+    private URL personEditDialogURI = this.getClass().getResource(ROOT_VIEW_DIR + "/PersonEditDialog.fxml");
+    private URL rootLayoutURL = this.getClass().getResource(ROOT_VIEW_DIR + "/RootLayout.fxml");
+    private URL personOverviewURL = this.getClass().getResource(ROOT_VIEW_DIR + "/PersonOverview.fxml");
 
     public FXMLLoader personEditDialogLoader() {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(personEditDialogURI);
-        return loader;
+        return new FXMLLoader(personEditDialogURI);
     }
-
 
     public FXMLLoader rootLayoutLoader() {
-        if (this.rootLayoutLoader == null) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("/app/view/RootLayout.fxml"));
-            this.rootLayoutLoader = loader;
-        }
-        return this.rootLayoutLoader;
-    }
-
-    public BorderPane rootLayout() throws IOException {
-        if (this.rootLayout == null) {
-            this.rootLayout = (BorderPane) rootLayoutLoader().load();
-        }
-
-        return this.rootLayout;
+        return new FXMLLoader(rootLayoutURL);
     }
 
     public FXMLLoader personOverviewLoader() {
-        if (this.personOverviewLoader == null) {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.getClass().getResource("/app/view/PersonOverview.fxml"));
-            this.personOverviewLoader = loader;
-        }
+        return new FXMLLoader(personOverviewURL);
 
-        return this.personOverviewLoader;
-    }
-
-    public AnchorPane personOverview() throws IOException {
-        if (this.personOverview == null) {
-            this.personOverview = (AnchorPane) personOverviewLoader().load();
-        }
-
-        return this.personOverview;
     }
 }

@@ -6,6 +6,7 @@ import app.view.PersonOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,24 +33,23 @@ public class FXApplication extends Application implements CommandLineRunner {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
 
+        FXMLLoader rootLoader = layoutConfig.rootLayoutLoader();
         // Show the scene containing the root layout.
         try {
-            Scene scene = new Scene(layoutConfig.rootLayout());
+            BorderPane pane = rootLoader.load();
+            FXMLLoader personOverviewLoader = layoutConfig.personOverviewLoader();
+
+            Scene scene = new Scene(pane);
             primaryStage.setScene(scene);
             primaryStage.show();
+            pane.setCenter(personOverviewLoader.load());
+
+            // Give the controller access to the main app.
+            PersonOverviewController controller = personOverviewLoader.getController();
+            controller.setFXApplication(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        try {
-            layoutConfig.rootLayout().setCenter(layoutConfig.personOverview());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Give the controller access to the main app.
-        PersonOverviewController controller = layoutConfig.personOverviewLoader().getController();
-        controller.setFXApplication(this);
     }
 
     public boolean showPersonEditDialog(Person person) {
