@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter:1.4.2.RELEASE'
+    compile 'org.pcap4j:pcap4j-core:1.7.0'
+    compile 'org.pcap4j:pcap4j-packetfactory-static:1.7.0'
+    testCompile 'junit:junit:4.12'
+}
