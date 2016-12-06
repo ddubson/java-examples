@@ -2,6 +2,7 @@ package app.view;
 
 import app.FXApplication;
 import app.model.Person;
+import app.util.DateUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -82,9 +83,7 @@ public class PersonOverviewController {
             streetLabel.setText(person.getStreet());
             postalCodeLabel.setText(Integer.toString(person.getPostalCode()));
             cityLabel.setText(person.getCity());
-
-            // TODO: We need a way to convert the birthday into a String!
-            // birthdayLabel.setText(...);
+            birthdayLabel.setText(DateUtil.format(person.getBirthday()));
         } else {
             // Person is null, remove all the text.
             firstNameLabel.setText("");
