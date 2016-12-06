@@ -1,22 +1,26 @@
 package org.ddubson.pcap;
 
-import com.sun.jna.Platform;
-import org.pcap4j.core.*;
-import org.pcap4j.packet.EthernetPacket;
-import org.pcap4j.packet.IpV4Packet;
-import org.pcap4j.packet.IpV6Packet;
-import org.pcap4j.util.NifSelector;
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.Pcaps;
+import org.pcap4j.util.LinkLayerAddress;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.util.List;
 import java.util.stream.Stream;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Author: ddubson
  */
 @SpringBootApplication
+@RestController
 public class PacketCaptureApp implements CommandLineRunner {
     private static final String COUNT_KEY
             = PacketCaptureApp.class.getName() + ".count";
@@ -51,9 +55,32 @@ public class PacketCaptureApp implements CommandLineRunner {
         System.out.println(s);
     }
 
+    @RequestMapping("/")
+    public String app() {
+        return "hello";
+    }
+
+    /**
+     * List all Network Interfaces (NIFs)
+     *
+     * @return
+     * @throws PcapNativeException
+     */
+    @RequestMapping(value = "/nifs", produces = "application/json")
+    public List<NetworkInterface> nifs() throws PcapNativeException {
+        return Pcaps.findAllDevs().stream().map(dev -> {
+            NetworkInterface ni = new NetworkInterface();
+            ni.setName(dev.getName());
+            ni.setDescription(dev.getDescription());
+            ni.setLinkLayerAddresses(dev.getLinkLayerAddresses().stream().map(LinkLayerAddress::toString).collect(toList()));
+            ni.setNetworkLayerAddresses(dev.getAddresses().stream().map(Object::toString).collect(toList()));
+            return ni;
+        }).sorted(comparing(NetworkInterface::getName)).collect(toList());
+    }
+
     @Override
     public void run(String... args) throws Exception {
-        String filter = args.length != 0 ? args[0] : "";
+        /*String filter = args.length != 0 ? args[0] : "";
 
         System.out.println(COUNT_KEY + ": " + COUNT);
         System.out.println(READ_TIMEOUT_KEY + ": " + READ_TIMEOUT);
@@ -139,6 +166,6 @@ public class PacketCaptureApp implements CommandLineRunner {
 
         } finally {
             handle.close();
-        }
+        }*/
     }
 }
