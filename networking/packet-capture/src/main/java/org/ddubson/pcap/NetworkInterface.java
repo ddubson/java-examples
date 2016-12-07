@@ -14,6 +14,15 @@ public class NetworkInterface {
     private List<String> linkLayerAddresses;
     @JsonProperty("layer-III-addresses")
     private List<String> networkLayerAddresses;
+    private boolean isLoopback;
+
+    public boolean isLoopback() {
+        return isLoopback;
+    }
+
+    public void setLoopback(boolean loopback) {
+        isLoopback = loopback;
+    }
 
     public List<String> getNetworkLayerAddresses() {
         return networkLayerAddresses;

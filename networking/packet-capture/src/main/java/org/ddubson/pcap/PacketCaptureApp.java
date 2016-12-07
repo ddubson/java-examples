@@ -74,6 +74,7 @@ public class PacketCaptureApp implements CommandLineRunner {
             ni.setDescription(dev.getDescription());
             ni.setLinkLayerAddresses(dev.getLinkLayerAddresses().stream().map(LinkLayerAddress::toString).collect(toList()));
             ni.setNetworkLayerAddresses(dev.getAddresses().stream().map(Object::toString).collect(toList()));
+            ni.setLoopback(dev.isLoopBack());
             return ni;
         }).sorted(comparing(NetworkInterface::getName)).collect(toList());
     }
