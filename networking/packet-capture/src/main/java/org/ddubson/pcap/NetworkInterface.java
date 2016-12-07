@@ -11,7 +11,7 @@ public class NetworkInterface {
     private String name;
     private String description;
     @JsonProperty("layer-II-addresses")
-    private List<String> linkLayerAddresses;
+    private List<LinkLayerAddress> linkLayerAddresses;
     @JsonProperty("layer-III-addresses")
     private List<String> networkLayerAddresses;
     private boolean isLoopback;
@@ -48,11 +48,11 @@ public class NetworkInterface {
         this.description = description;
     }
 
-    public List<String> getLinkLayerAddresses() {
+    public List<LinkLayerAddress> getLinkLayerAddresses() {
         return linkLayerAddresses;
     }
 
-    public void setLinkLayerAddresses(List<String> linkLayerAddresses) {
+    public void setLinkLayerAddresses(List<LinkLayerAddress> linkLayerAddresses) {
         this.linkLayerAddresses = linkLayerAddresses;
     }
 }

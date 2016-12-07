@@ -1,9 +1,10 @@
 package org.ddubson.pcap;
 
+import org.ddubson.pcap.mac.MACLookup;
 import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.Pcaps;
-import org.pcap4j.util.LinkLayerAddress;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,9 +37,10 @@ public class PacketCaptureApp implements CommandLineRunner {
             = PacketCaptureApp.class.getName() + ".snaplen";
     private static final int SNAPLEN
             = Integer.getInteger(SNAPLEN_KEY, 65536); // [bytes]
+    @Autowired
+    private MACLookup macLookup;
 
     public PacketCaptureApp() {
-
     }
 
     public static void main(String[] args) throws PcapNativeException, NotOpenException {
@@ -72,7 +74,12 @@ public class PacketCaptureApp implements CommandLineRunner {
             NetworkInterface ni = new NetworkInterface();
             ni.setName(dev.getName());
             ni.setDescription(dev.getDescription());
-            ni.setLinkLayerAddresses(dev.getLinkLayerAddresses().stream().map(LinkLayerAddress::toString).collect(toList()));
+            ni.setLinkLayerAddresses(dev.getLinkLayerAddresses().stream().map(address -> {
+                LinkLayerAddress addr = new LinkLayerAddress();
+                addr.setAddress(address.toString());
+                addr.setManufacturer(macLookup.lookupMAC(addr.getAddress()));
+                return addr;
+            }).collect(toList()));
             ni.setNetworkLayerAddresses(dev.getAddresses().stream().map(Object::toString).collect(toList()));
             ni.setLoopback(dev.isLoopBack());
             return ni;
