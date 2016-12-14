@@ -33,7 +33,6 @@ public class MacVendorLookup implements MACLookup {
                 String fullUrl = String.format("http://api.macvendors.com/%s", macAddress);
                 c = Optional.ofNullable(Request.Get(fullUrl).execute().returnContent());
             } catch (IOException e) {
-                System.out.println(e.getMessage());
                 cachedMacStore.storeMac(macAddress, "N/A");
                 return "";
             }

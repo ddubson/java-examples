@@ -80,7 +80,24 @@ public class PacketCaptureApp implements CommandLineRunner {
                 addr.setManufacturer(macLookup.lookupMAC(addr.getAddress()));
                 return addr;
             }).collect(toList()));
-            ni.setNetworkLayerAddresses(dev.getAddresses().stream().map(Object::toString).collect(toList()));
+            ni.setNetworkLayerAddresses(dev.getAddresses().stream().map(
+                    (addr) -> {
+                        NetworkLayerAddressBuilder builder = new NetworkLayerAddressBuilder();
+                        if (addr.getAddress() != null) {
+                            builder.setAddress(addr.getAddress().toString());
+                        }
+                        if (addr.getNetmask() != null) {
+                            builder.setNetmask(addr.getNetmask().toString());
+                        }
+                        if (addr.getBroadcastAddress() != null) {
+                            builder.setBroadcastAddress(addr.getBroadcastAddress().toString());
+                        }
+                        if (addr.getDestinationAddress() != null) {
+                            builder.setDestinationAddress(addr.getDestinationAddress().toString());
+                        }
+
+                        return builder.createNetworkLayerAddress();
+                    }).collect(toList()));
             ni.setLoopback(dev.isLoopBack());
             return ni;
         }).sorted(comparing(NetworkInterface::getName)).collect(toList());
