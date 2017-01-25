@@ -8,30 +8,30 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Author: ddubson
  */
-public class SHA256Encoder {
+public class SHA256Hash {
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        manualSHA256Encoding("Hello World!");
-        guavaSHA256Encoding("Hello World!");
-        commonsSHA256Encoding("Hello World!");
+        printEncodingInHex("Manual", manualSHA256Encoding("Hello World!"));
+        printEncodingInHex("Guava", guavaSHA256Encoding("Hello World!"));
+        printEncodingInHex("Commons", commonsSHA256Encoding("Hello World!"));
+
     }
 
-    public static void commonsSHA256Encoding(String str) {
-        System.out.println("[Commons] Encoded SHA256 Hex: " + DigestUtils.sha256Hex(str));
+    public static String commonsSHA256Encoding(String str) {
+        return DigestUtils.sha256Hex(str);
     }
 
-    public static void guavaSHA256Encoding(String str) {
-        String sha256hex = Hashing.sha256()
+    public static String guavaSHA256Encoding(String str) {
+        return Hashing.sha256()
                 .hashString(str, StandardCharsets.UTF_8)
                 .toString();
-        System.out.println("[Guava] Encoded SHA256 Hex: " + sha256hex);
     }
 
-    public static void manualSHA256Encoding(String str) throws NoSuchAlgorithmException {
+    public static String manualSHA256Encoding(String str) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] encodedhash = digest.digest(
                 str.getBytes(StandardCharsets.UTF_8));
 
-        System.out.println("[Manual] Encoded SHA256 Hex: "+ bytesToHex(encodedhash));
+        return bytesToHex(encodedhash);
     }
 
     private static String bytesToHex(byte[] hash) {
@@ -42,5 +42,9 @@ public class SHA256Encoder {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public static void printEncodingInHex(String encoder, String encodedString) {
+        System.out.printf("[%s] SHA256: %s\n", encoder, encodedString);
     }
 }
