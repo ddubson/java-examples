@@ -10,4 +10,6 @@ repositories {
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'com.google.guava:guava:21.0'
 }
