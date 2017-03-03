@@ -21,13 +21,9 @@ import static org.junit.Assert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         classes = TodoApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = "classpath:/application.yml"
 )
 public class TodoApplicationIntegrationShowcase2Test {
-    @LocalServerPort
-    int serverPort;
-
     @Autowired
     TodoService todoService;
 
@@ -37,7 +33,7 @@ public class TodoApplicationIntegrationShowcase2Test {
     @Test
     public void todoServiceShouldReturnEmptyListWhenThereAreNoTodos() {
         List<Todo> todos = todoService.getAllTodos();
-        assertThat(todos.size(), equalTo(0));
+        assertThat(todos.size(), equalTo(2));
 
         System.out.println(value);
     }

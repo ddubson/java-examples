@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  * ContextConfiguration only loads Spring related entities, but not the entire Spring Boot collection of
- * entities that might be needed. Refer to TodoApplicationTest2 for an example of full Spring Boot test.
+ * entities that might be needed. Refer to TodoApplicationIntegrationShowcaseTest2 for an example of full Spring Boot test.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,8 +23,8 @@ public class TodoApplicationIntegrationShowcase1Test {
     TodoService todoService;
 
     @Test
-    public void todoServiceShouldReturnEmptyListWhenThereAreNoTodos() {
+    public void todoServiceShouldReturnTwoTodos() {
         List<Todo> todos = todoService.getAllTodos();
-        assertThat(todos.size(), equalTo(0));
+        assertThat(todos.size(), equalTo(2));
     }
 }
