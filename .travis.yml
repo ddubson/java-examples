@@ -6,4 +6,5 @@ addons:
       - oracle-java8-installer
 script: ./gradlew clean build
 after_success:
+  - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash) -t ad1cf46f-bc44-40a3-ba43-ec6e132750d8
