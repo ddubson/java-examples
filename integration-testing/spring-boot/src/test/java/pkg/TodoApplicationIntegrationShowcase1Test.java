@@ -11,9 +11,14 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
+/**
+ * ContextConfiguration only loads Spring related entities, but not the entire Spring Boot collection of
+ * entities that might be needed. Refer to TodoApplicationTest2 for an example of full Spring Boot test.
+ */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TodoApplication.class)
-public class TodoApplicationTest {
+public class TodoApplicationIntegrationShowcase1Test {
     @Autowired
     TodoService todoService;
 
