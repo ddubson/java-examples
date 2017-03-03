@@ -1,0 +1,15 @@
+version 'unspecified'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'junit:junit:4.12'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.5.1.RELEASE'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE'
+}

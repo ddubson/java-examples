@@ -1,4 +1,4 @@
-rootProject.name = 'code-dojo-java'
+rootProject.name = 'lets-java'
 include 'spring-cloud'
 include 'spring-cloud:refresh-scope-example'
 include 'design-patterns'
@@ -20,3 +20,6 @@ include 'java-gui:javafx-simple'
 include 'networking'
 include 'networking:packet-capture'
 include 'networking:pcap-ui'
+include 'integration-testing'
+include 'integration-testing:spring-boot'
+
