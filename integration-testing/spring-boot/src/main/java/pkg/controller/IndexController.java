@@ -4,13 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * Created by pivotal on 3/3/17.
- */
 @Controller
-public class ViewController {
+public class IndexController {
     @GetMapping("/")
-    public String helloWorldView(Model model) {
-        return "index";
+    public String index(Model model) {
+        return "Index";
     }
 }

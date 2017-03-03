@@ -1,2 +1,6 @@
 logging.level:
-  org.springframework: WARN
+  org.springframework: ERROR
+
+spring:
+  thymeleaf:
+    cache: false
