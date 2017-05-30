@@ -1,12 +1,33 @@
+ext {
+    springBootVersion = "1.5.3.RELEASE"
+    springVersion = "4.3.7.RELEASE"
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR2'
+    }
 }
 
 jacocoTestReport {
@@ -16,15 +37,128 @@ jacocoTestReport {
     }
 }
 
+allprojects {
+    apply plugin: "java"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+}
+
+project(":spring-session:redis-session") {
+    dependencies {
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-redis:$springBootVersion"
+        compile 'org.springframework.session:spring-session:1.2.2.RELEASE'
+    }
+}
+
+project(":spring-data:spring-data-mongo-simple") {
+    dependencies {
+        compile 'org.springframework.data:spring-data-mongodb:1.9.4.RELEASE'
+        compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+    }
+}
+
+project(":spring-cloud:refresh-scope-example") {
+    dependencies {
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-beans:$springVersion"
+        compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+        compile 'org.springframework.cloud:spring-cloud-starter:1.1.7.RELEASE'
+    }
+}
+
+project(":spring-boot:boot-simple") {
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    }
+}
+
+project(":spring-boot:boot-actuator") {
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-remote-shell:$springBootVersion"
+    }
+}
+
+project(":networking:packet-capture") {
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        compile 'org.pcap4j:pcap4j-core:1.7.0'
+        compile 'org.pcap4j:pcap4j-packetfactory-static:1.7.0'
+        compile('org.apache.httpcomponents:fluent-hc:4.5.2')
+                { exclude group: 'commons-logging', module: 'commons-logging' }
+    }
+}
+
+project(":java-gui:javafx-simple") {
+    sourceSets {
+        main {
+            java {
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/resources'
+                srcDir 'src/main/java'
+            }
+        }
+    }
+
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-beans:$springVersion"
+        compile 'org.apache.commons:commons-lang3:3.5'
+    }
+}
+
+project(":integration-testing:spring-boot") {
+    bootRun {
+        addResources = true
+    }
+
+    dependencies {
+        compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion"
+        compile "org.springframework.boot:spring-boot-devtools:$springBootVersion"
+        testCompile 'org.fluentlenium:fluentlenium-junit:3.1.1'
+        testCompile 'org.fluentlenium:fluentlenium-assertj:3.1.1'
+        testCompile 'org.seleniumhq.selenium:htmlunit-driver:2.23'
+        testCompile 'org.eclipse.jetty.websocket:websocket-api:9.3.5.v20151012'
+        testCompile 'org.eclipse.jetty.websocket:websocket-client:9.3.5.v20151012'
+        testCompile 'xml-apis:xml-apis:1.4.01'
+        testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
+    }
+}
+
+project(":core-java") {
+    dependencies {
+        compile 'commons-codec:commons-codec:1.10'
+        compile 'com.google.guava:guava:21.0'
+    }
+}
+
 dependencies {
-    compile 'org.springframework:spring-core:4.3.3.RELEASE'
-    compile 'org.springframework:spring-context:4.3.3.RELEASE'
-    compile 'org.springframework:spring-beans:4.3.3.RELEASE'
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-beans:$springVersion"
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.1-1'
     compile 'com.basho.riak:riak-client:2.0.8'
     compile 'com.graphql-java:graphql-java:2.2.0'
     compile 'org.apache.commons:commons-lang3:3.4'
-    testCompile 'junit:junit:4.12'
 }
 
 task wrapper(type: Wrapper) {

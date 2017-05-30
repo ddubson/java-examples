@@ -39,9 +39,9 @@ public class UndirectedGraph implements Graph {
         Node n1 = fetchNodeIfExists(node1);
         Node n2 = fetchNodeIfExists(node2);
 
-        return edgeList.stream().filter(edge -> edge.getEdgeWeight() == edgeWeight &&
+        return edgeList.stream().anyMatch(edge -> edge.getEdgeWeight() == edgeWeight &&
                 ((edge.getOrigin() == n1 && edge.getDestination() == n2) ||
-                        (edge.getDestination() == n2 && edge.getOrigin() == n1))).findFirst().isPresent();
+                        (edge.getDestination() == n2 && edge.getOrigin() == n1)));
     }
 
     private Node fetchNodeIfExists(int node1) {
