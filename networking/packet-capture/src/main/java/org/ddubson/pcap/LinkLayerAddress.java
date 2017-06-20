@@ -1,8 +1,5 @@
 package org.ddubson.pcap;
 
-/**
- * Created by ddubs on 12/7/2016.
- */
 public class LinkLayerAddress {
     private String address;
     private String manufacturer;

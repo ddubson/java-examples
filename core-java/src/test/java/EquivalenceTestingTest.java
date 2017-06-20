@@ -5,9 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Author: ddubson
- */
 public class EquivalenceTestingTest {
     Book b1, b2, b3, b4;
 

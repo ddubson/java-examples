@@ -10,9 +10,6 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * Author: ddubson
- */
 @SpringBootApplication
 @EnableRedisHttpSession
 @RestController

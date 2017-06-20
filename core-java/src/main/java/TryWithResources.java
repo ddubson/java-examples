@@ -4,9 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Author: ddubson
- */
 public class TryWithResources {
     public static void main(String[] args) {
         Path path = Paths.get("src", "main", "resources");
