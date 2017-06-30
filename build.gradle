@@ -5,12 +5,12 @@ ext {
     springBootRedisVersion = "1.4.7.RELEASE"
     springSessionVersion = "1.3.1.RELEASE"
     springCloudVersion = "1.2.2.RELEASE"
+    pcap4jVersion = "1.7.1"
 }
 
 buildscript {
-    ext {
-        springBootVersion = '1.5.3.RELEASE'
-    }
+    ext.springBootVersion = '1.5.4.RELEASE'
+
     repositories {
         mavenCentral()
     }
@@ -100,8 +100,8 @@ project(":networking:packet-capture") {
     dependencies {
         compile "org.springframework.boot:spring-boot-starter:$springBootVersion"
         compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-        compile 'org.pcap4j:pcap4j-core:1.7.0'
-        compile 'org.pcap4j:pcap4j-packetfactory-static:1.7.1'
+        compile "org.pcap4j:pcap4j-core:$pcap4jVersion"
+        compile "org.pcap4j:pcap4j-packetfactory-static:$pcap4jVersion"
         compile('org.apache.httpcomponents:fluent-hc:4.5.3')
                 { exclude group: 'commons-logging', module: 'commons-logging' }
     }
@@ -166,5 +166,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.2'
+    gradleVersion = '4.0'
 }
